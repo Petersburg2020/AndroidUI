@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.github.mikephil.charting.charts.CandleStickChart
+            android:id="@+id/candle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</android.widget.LinearLayout>

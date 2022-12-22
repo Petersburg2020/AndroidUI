@@ -1,0 +1,196 @@
+<resources>
+	<!--
+    <declare-styleable name="FullscreenAttrs">
+        <attr name="fullscreenBackgroundColor" format="color"/>
+        <attr name="fullscreenTextColor" format="color"/>
+    </declare-styleable>
+    
+    <declare-styleable name="DotSelector">
+        <attr name="color" format="color"/>
+        <attr name="selectorRatio" format="float"/>
+        <attr name="selected" format="boolean"/>
+        <attr name="selectorColor" format="color"/>
+    </declare-styleable>
+    -->
+
+    <declare-styleable name="ImageTextButton">
+        <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+        <attr name="android:src"/>
+        <attr name="android:paddingVertical"/>
+        <attr name="isWrapped" format="boolean"/>
+        <attr name="image_size" format="dimension"/>
+        <attr name="image_height" format="dimension"/>
+        <attr name="image_width" format="dimension"/>
+        <attr name="image_text_margin" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="MultiActionText">
+        <attr name="linkText" format="string"/>
+        <attr name="subColorText" format="string"/>
+        <attr name="subFontText" format="string"/>
+        <attr name="subSizeText" format="string"/>
+        <attr name="subColor" format="color"/>
+        <attr name="subSize" format="dimension"/>
+        <attr name="subFont" format="enum">
+            <enum name="serif" value="0"/>
+            <enum name="sans" value="1"/>
+            <enum name="monospace" value="2"/>
+            <enum name="serif_bold" value="3"/>
+            <enum name="sans_bold" value="4"/>
+            <enum name="monospace_bold" value="5"/>
+            <enum name="serif_italic" value="6"/>
+            <enum name="sans_italic" value="7"/>
+            <enum name="monospace_italic" value="8"/>
+        </attr>
+        <attr name="view_background" format="enum">
+            <enum value="11" name="transparent" />
+            <enum value="0" name="black"/>
+            <enum value="1" name="gray"/>
+            <enum value="2" name="white"/>
+            <enum value="3" name="red" />
+            <enum value="4" name="blue" />
+            <enum value="5" name="green" />
+            <enum value="6" name="yellow" />
+            <enum value="7" name="orange" />
+            <enum value="8" name="purple" />
+            <enum value="9" name="pink"/>
+            <enum value="10" name="brown"/>
+        </attr>
+        <!-- Name of the method in this View's context to invoke when the linkText is
+             clicked. This name must correspond to a public method that takes
+             exactly one parameter of type View. For instance, if you specify
+             <code>link="sayHello"</code>, you must declare a
+             <code>public void sayHello(View v)</code> method of your context
+             (typically, your Activity). -->
+        <attr name="link" format="string"/>
+        <attr name="font_family" format="enum">
+            <enum name="sanserif" value="0"/>
+            <enum name="serif" value="1"/>
+            <enum name="cursive" value="2" />
+            <enum name="casual" value="3"/>
+        </attr>
+        <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+        <attr name="android:textColorLink"/>
+        <attr name="view_font_style" format="enum">
+            <enum name="bold" value="0"/>
+            <enum name="italic" value="1"/>
+            <enum name="normal" value="2"/>
+            <enum name="bold_italic" value="3"/>
+        </attr>
+        <attr name="view_width" format="dimension"/>
+        <attr name="view_height" format="dimension"/>
+        <attr name="android:typeface"/>
+        <attr name="alignment" format="enum">
+            <enum name="center" value="0"/>
+            <enum name="top_right" value="1"/>
+            <enum name="top_left" value="2"/>
+            <enum name="bottom_right" value="3"/>
+            <enum name="bottom_left" value="4"/>
+            <enum name="center_left" value="5"/>
+            <enum name="center_right" value="6"/>
+            <enum name="top_center" value="7"/>
+            <enum name="bottom_center" value="8"/>
+        </attr>
+        <attr name="horizontal_alignment" format="enum">
+            <enum name="center" value="0"/>
+            <enum name="left" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="vertical_alignment" format="enum">
+            <enum name="center" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="bottom" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="MultiActionEditor">
+        <attr name="linkText"/>
+        <attr name="subColorText"/>
+        <attr name="subFontText"/>
+        <attr name="subSizeText"/>
+        <attr name="subColor"/>
+        <attr name="subSize"/>
+        <attr name="subFont"/>
+        <attr name="view_background"/>
+        <!-- Name of the method in this View's context to invoke when the linkText is
+             clicked. This name must correspond to a public method that takes
+             exactly one parameter of type View. For instance, if you specify
+             <code>link="sayHello"</code>, you must declare a
+             <code>public void sayHello(View v)</code> method of your context
+             (typically, your Activity). -->
+        <attr name="link"/>
+        <attr name="android:hint"/>
+        <attr name="android:textColorHint"/>
+        <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+        <attr name="android:textColorLink"/>
+        <attr name="view_font_style"/>
+        <attr name="android:typeface"/>
+        <attr name="horizontal_alignment"/>
+        <attr name="view_width"/>
+        <attr name="view_height"/>
+        <attr name="alignment"/>
+        <attr name="autoComplete_format" format="enum">
+            <enum name="coding" value="0"/>
+            <enum name="colon" value="1"/>
+            <enum name="comma" value="2"/>
+            <enum name="dot" value="3"/>
+            <enum name="semicolon" value="4"/>
+            <enum name="space" value="5"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ScrollingTextView">
+        <attr name="linkText"/>
+        <attr name="subColorText"/>
+        <attr name="subFontText"/>
+        <attr name="subSizeText"/>
+        <attr name="subColor"/>
+        <attr name="subSize"/>
+        <attr name="subFont"/>
+        <attr name="view_background"/>
+        <!-- Name of the method in this View's context to invoke when the linkText is
+             clicked. This name must correspond to a public method that takes
+             exactly one parameter of type View. For instance, if you specify
+             <code>link="sayHello"</code>, you must declare a
+             <code>public void sayHello(View v)</code> method of your context
+             (typically, your Activity). -->
+        <attr name="link"/>
+        <attr name="android:hint"/>
+        <attr name="android:textColorHint"/>
+        <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+        <attr name="android:textColorLink"/>
+        <attr name="view_font_style"/>
+        <attr name="android:typeface"/>
+        <attr name="view_width"/>
+        <attr name="view_height"/>
+        <attr name="scrollable" format="boolean" />
+        <attr name="alignment"/>
+    </declare-styleable>
+
+    <declare-styleable name="CodeEditor">
+        <attr name="code_theme" format="enum">
+            <enum name="ariake_dark" value="1" />
+            <enum name="dracula" value="2" />
+            <enum name="normal" value="0" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="AbsoluteLayout">
+        <attr name="x" format="integer"/>
+        <attr name="y" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="GifView">
+        <attr name="paused" format="boolean"/>
+        <attr name="gif" format="reference"/>
+    </declare-styleable>
+
+</resources>

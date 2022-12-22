@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+    
+    <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="10dp"
+            android:orientation="vertical">
+        
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:text="SOCIALS"/>
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/socials"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+        
+    </LinearLayout>
+    
+
+</LinearLayout>

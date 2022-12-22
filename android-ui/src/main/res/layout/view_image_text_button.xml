@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+    <LinearLayout 
+        android:id="@+id/layout"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/image"
+            android:scaleType="fitXY"
+            android:contentDescription="Button Image"/>
+
+        <nx.peter.app.ui.view.MultiActionText
+                android:text="Button Text"
+                android:layout_width="wrap_content"
+                android:layout_height="39dp"
+                android:textSize="10sp"
+                app:alignment="center_left"
+                android:id="@+id/multi_text"/>
+            
+    </LinearLayout>
+
+</LinearLayout>

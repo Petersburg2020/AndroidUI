@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <nx.peter.app.ui.view.MultiActionText
+            android:id="@+id/line_number"
+            app:view_background="black"
+            android:paddingHorizontal="2dp"
+            android:text="01"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+    <LinearLayout
+            android:id="@+id/divider"
+            android:background="@color/white"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"/>
+
+    <nx.peter.app.ui.view.MultiActionEditor
+            android:id="@+id/editor"
+            app:view_background="black"
+            android:textColor="@color/white"
+            android:paddingHorizontal="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</LinearLayout>
