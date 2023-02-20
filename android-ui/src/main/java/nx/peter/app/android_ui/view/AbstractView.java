@@ -28,6 +28,8 @@ public abstract class AbstractView<V extends View> extends LinearLayout implemen
 
     protected abstract void init(AttributeSet attrs);
 
+    protected abstract void reset();
+
     @Override
     public V getView() {
         return (V) this;
@@ -131,6 +133,7 @@ public abstract class AbstractView<V extends View> extends LinearLayout implemen
 
     @Override
     public void setBackground(@NonNull Background background) {
+        this.background = background;
         switch (background) {
             case Black:
                 setBackgroundResource(R.drawable.black);

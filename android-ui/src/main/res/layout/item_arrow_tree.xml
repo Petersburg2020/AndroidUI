@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/item_layout"
+        android:padding="3dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <CheckBox
+            android:id="@+id/arrow"
+            android:background="@drawable/arrow_checker"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="2dp"
+            android:button="@drawable/transparent"/>
+
+    <ImageView
+            android:id="@+id/icon"
+            android:layout_marginEnd="5dp"
+            android:scaleType="fitXY"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/no_image"
+            android:contentDescription="@string/icon_for_tree_item"
+            android:tint="@color/grey"
+            tools:ignore="UseAppTint"/>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginHorizontal="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <nx.peter.app.android_ui.view.MultiActionText
+                android:id="@+id/text"
+                android:textColor="@color/black"
+                android:text="@string/tree_view_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <nx.peter.app.android_ui.view.ScrollingTextView
+                android:id="@+id/detail"
+                android:textColor="@color/black"
+                android:text="@string/tree_view_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</LinearLayout>

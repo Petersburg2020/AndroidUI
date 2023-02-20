@@ -81,10 +81,10 @@ public class FontFamily {
               font = Font.JOSEFIN_SANS_SEMI_BOLD_ITALIC;
               break;
             case Thin:
-              font = Font.JOSEFIN_SANS_THIN;
+              font = Font.JOSEFIN_SANS_EXTRA_BOLD;
               break;
             case ThinItalic:
-              font = Font.JOSEFIN_SANS_THIN_ITALIC;
+              font = Font.JOSEFIN_SANS_EXTRA_BOLD_ITALIC;
           }
           fam.addMember(s, font);
         }

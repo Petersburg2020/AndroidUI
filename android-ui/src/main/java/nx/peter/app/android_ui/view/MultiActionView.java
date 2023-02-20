@@ -17,8 +17,16 @@ import java.util.Iterator;
 import java.util.List;
 
 public interface MultiActionView<V extends View> extends IView<V> {
+    /**
+     * Set text for this multi action view
+     * @param text text to be displayed
+     */
     void setText(@NonNull CharSequence text);
 
+    /**
+     * Set the text displayed color
+     * @param color text displayed color
+     */
     void setTextColor(int color);
 
     void setTextSize(float size);
@@ -99,6 +107,8 @@ public interface MultiActionView<V extends View> extends IView<V> {
 
     void addSubImages(@DrawableRes int image, @ColorInt int tint, float size, CharSequence... subs);
 
+    void addLinks(TextLink... links);
+
     void addBullets(CharSequence... subs);
 
     void addBullets(int gap, CharSequence... subs);
@@ -121,6 +131,10 @@ public interface MultiActionView<V extends View> extends IView<V> {
 
     void setBackgroundColor(int color);
 
+    void setSingleLine(boolean isSingleLine);
+
+    void setEllipsize(Ellipsize ellipsize);
+
     boolean removeSubText(@NonNull Text text);
 
     void setVerticalAlignment(@NonNull VerticalAlignment alignment);
@@ -134,6 +148,8 @@ public interface MultiActionView<V extends View> extends IView<V> {
     Font getFont();
 
     Font.Style getFontStyle();
+
+    boolean isSingleLine();
 
     int getTextColor();
 
@@ -152,6 +168,8 @@ public interface MultiActionView<V extends View> extends IView<V> {
     float getTextSize();
 
     CharSequence getText();
+
+    Ellipsize getEllipsize();
 
     boolean isLinksClickable();
 

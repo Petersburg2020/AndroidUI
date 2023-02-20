@@ -1,5 +1,6 @@
 package nx.peter.app.android_ui.view.text;
 
+import androidx.annotation.NonNull;
 import nx.peter.app.android_ui.view.MultiActionView;
 
 public abstract class Text {
@@ -21,9 +22,10 @@ public abstract class Text {
 	}
 
 	public boolean equals(Text another) {
-		return another != null ? another.start == start && another.text == text && another.type.equals(type) : false;
+		return another != null && another.start == start && another.text.contentEquals(text) && another.type.equals(type);
 	}
 
+	@NonNull
 	@Override
 	public String toString() {
 		return "<" + type + ">" + text + "(" + start + ", " + end + ")</" + type + ">";
@@ -32,12 +34,12 @@ public abstract class Text {
 	public enum Type {
 		Background,
 		Bullet,
-		Color, 
-		Edit,
+		Color,
 		Font, 
 		Image,
 		Link, 
-		Size, 
+		Size,
+		Strikethrough,
 		Subscript,
 		Superscript,
 		Underline,

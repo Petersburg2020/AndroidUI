@@ -9,8 +9,8 @@ public class TextStrikeThrough extends Text {
 		this(text, null, color, start);
 	}
 
-	public TextStrikeThrough(CharSequence text, MultiActionView view, int color, int start) {
-		super(text, Type.Edit, view, start);
+	public TextStrikeThrough(CharSequence text, MultiActionView<?> view, int color, int start) {
+		super(text, Type.Strikethrough, view, start);
 		this.color = color;
 	}
 }

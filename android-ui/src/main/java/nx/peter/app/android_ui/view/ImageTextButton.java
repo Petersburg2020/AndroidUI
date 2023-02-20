@@ -119,7 +119,8 @@ public class ImageTextButton extends AbstractView<ImageTextButton> implements Mu
         reset();
     }
 
-    private void reset() {
+    @Override
+    protected void reset() {
         propertyChanged = null;
         textChanged = null;
         OnLinkClickListener<ImageTextButton> linkClick = null;
@@ -142,6 +143,26 @@ public class ImageTextButton extends AbstractView<ImageTextButton> implements Mu
         setTextSize(16);
         // setImage(R.drawable.ic_launcher_background);
         setImageSize(20);
+    }
+
+    @Override
+    public void setEllipsize(Ellipsize ellipsize) {
+        view.setEllipsize(ellipsize);
+    }
+
+    @Override
+    public Ellipsize getEllipsize() {
+        return view.getEllipsize();
+    }
+
+    @Override
+    public void setSingleLine(boolean isSingleLine) {
+        view.setSingleLine(isSingleLine);
+    }
+
+    @Override
+    public boolean isSingleLine() {
+        return view.isSingleLine();
     }
 
     public void setText(@NonNull CharSequence text) {

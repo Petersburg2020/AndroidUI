@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         minSdk 21
-        targetSdk 32
+        targetSdk 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.github.evrencoskun:Tableview:v0.8.9.4'
 
     implementation 'com.github.Cutta:GifView:1.6'
+    implementation 'com.github.bmelnychuk:atv:1.2.9'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     testImplementation 'junit:junit:4.13.2'
@@ -51,9 +52,9 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
 
-                groupId = 'com.github.Petersburg2020'
-                artifactId = 'android-ui'
-                version = '1.0.0'
+                groupId = 'com.github.Petersburg2020' as Publication
+                artifactId = 'android-ui' as Publication
+                version = '1.0.0' as Publication
             }
         }
     }

@@ -65,6 +65,7 @@ public class DragView<D extends View> extends Content<DragView, D> {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
         // for debugging
         @SuppressLint("DrawAllocation") Paint p = new Paint();
         p.setStyle(Paint.Style.FILL);

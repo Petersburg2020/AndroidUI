@@ -13,5 +13,10 @@ public class ColorPicker extends AbstractView<ColorPicker> {
       
   }
 
+  @Override
+  protected void reset() {
+
+  }
+
 }
 

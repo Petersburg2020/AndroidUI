@@ -27,6 +27,11 @@ public class Content<I extends View, V extends View> extends AbstractView<I> {
 
     }
 
+    @Override
+    protected void reset() {
+
+    }
+
     public void setContentView(@LayoutRes int layoutRes) {
         try {
             setContentView(LayoutInflater.from(getContext()).inflate(layoutRes, this, false));
@@ -130,51 +135,7 @@ public class Content<I extends View, V extends View> extends AbstractView<I> {
         background = b;
         if (isNotEmpty() && getContentView() instanceof IView)
             ((IView<?>) getContentView()).setBackground(b);
-        else {
-            switch (background) {
-                case Black:
-                    setBackgroundResource(R.drawable.black);
-                    break;
-                case White:
-                    setBackgroundResource(R.drawable.white);
-                    break;
-                case Grey:
-                    setBackgroundResource(R.drawable.grey);
-                    break;
-                case Blue:
-                    setBackgroundResource(R.drawable.blue);
-                    break;
-                case Brown:
-                    setBackgroundResource(R.drawable.brown);
-                    break;
-                case Cyan:
-                    setBackgroundResource(R.drawable.cyan);
-                    break;
-                case Lime:
-                    setBackgroundResource(R.drawable.lime);
-                    break;
-                case Green:
-                    setBackgroundResource(R.drawable.green);
-                    break;
-                case Yellow:
-                    setBackgroundResource(R.drawable.yellow);
-                    break;
-                case Red:
-                    setBackgroundResource(R.drawable.red);
-                    break;
-                case Orange:
-                    setBackgroundResource(R.drawable.orange);
-                    break;
-                case Purple:
-                    setBackgroundResource(R.drawable.purple);
-                    break;
-                case Pink:
-                    setBackgroundResource(R.drawable.pink);
-                    break;
-                default:
-                    setBackgroundResource(R.drawable.transparent);
-            }
-        }
+        else super.setBackground(b);
     }
 
     @Override

@@ -3,6 +3,7 @@ package nx.peter.app.android_ui.view;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.DragEvent;
 import android.view.View;
@@ -30,6 +31,11 @@ public class DragDropLayout extends AbstractLayout<DragDropLayout, View> {
     @Override
     protected void init(@Nullable AttributeSet attrs) {
         inflate(getContext(), R.layout.layout_drag_drop, this);
+        reset();
+    }
+
+    @Override
+    protected void reset() {
 
     }
 
@@ -122,7 +128,8 @@ public class DragDropLayout extends AbstractLayout<DragDropLayout, View> {
                     ClipData data = new ClipData(clipLabel, mimeTypes, item);
 
                     DragShadowBuilder dragShadowBuilder = new DragShadowBuilder(v);
-                    v.startDragAndDrop(data, dragShadowBuilder, v, 0);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                        v.startDragAndDrop(data, dragShadowBuilder, v, 0);
 
                     v.setVisibility(INVISIBLE);
                 }
@@ -164,7 +171,8 @@ public class DragDropLayout extends AbstractLayout<DragDropLayout, View> {
                         view.setVisibility(VISIBLE);
                         return true;
                     }
-                    default: return false;
+                    default:
+                        return false;
                 }
             });
         }
