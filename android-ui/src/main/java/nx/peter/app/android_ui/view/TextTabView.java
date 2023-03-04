@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TextTabView extends AbstractView<TextTabView> {
-	protected MultiActionText layout;
+	protected StyledText layout;
 	protected OnTabClickListener listener;
 	protected Adapter.OnDataChangedListener dListener;
 	protected IAdapter adapter;
@@ -56,7 +56,7 @@ public class TextTabView extends AbstractView<TextTabView> {
 		isAllTab = false;
 		style = TabStyle.PartialLink;
 		font = layout.getFont();
-		layout.setVerticalAlignment(MultiActionView.VerticalAlignment.Center);
+		layout.setVerticalAlignment(StyledView.VerticalAlignment.Center);
 		fontStyle = font.getStyle();
 
 		adapter = new IAdapter(listener);

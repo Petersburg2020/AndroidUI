@@ -1,6 +1,6 @@
 package nx.peter.app.android_ui.view.text;
 
-import nx.peter.app.android_ui.view.MultiActionView;
+import nx.peter.app.android_ui.view.StyledView;
 
 public class TextStrikeThrough extends Text {
 	public int color;
@@ -9,7 +9,7 @@ public class TextStrikeThrough extends Text {
 		this(text, null, color, start);
 	}
 
-	public TextStrikeThrough(CharSequence text, MultiActionView<?> view, int color, int start) {
+	public TextStrikeThrough(CharSequence text, StyledView<?> view, int color, int start) {
 		super(text, Type.Strikethrough, view, start);
 		this.color = color;
 	}

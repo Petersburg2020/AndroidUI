@@ -10,6 +10,8 @@ import android.text.method.LinkMovementMethod;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.TextView;
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import nx.peter.app.android_ui.view.text.*;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-abstract class IMultiActionView<I extends IMultiActionView, T extends TextView> extends AbstractView<I> implements MultiActionView<I> {
+abstract class AStyledView<I extends AStyledView, T extends TextView> extends AbstractView<I> implements StyledView<I> {
     protected T view;
     protected SpannableString span;
     protected String text;
@@ -29,11 +31,11 @@ abstract class IMultiActionView<I extends IMultiActionView, T extends TextView> 
     protected Ellipsize ellipsize;
     protected List<Text> subTexts;
 
-    public IMultiActionView(Context context) {
+    public AStyledView(Context context) {
         super(context);
     }
 
-    public IMultiActionView(Context context, AttributeSet attrs) {
+    public AStyledView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -62,6 +64,24 @@ abstract class IMultiActionView<I extends IMultiActionView, T extends TextView> 
         ellipsize = Ellipsize.None;
 
         setPadding(0);
+    }
+
+    public void setHint(@NonNull CharSequence hint) {
+        view.setHint(hint);
+    }
+
+    public CharSequence getHint() {
+        return view.getHint();
+    }
+
+    @Override
+    public void setHintColor(@ColorInt int color) {
+        view.setHintTextColor(color);
+    }
+
+    @Override
+    public int getHintColor() {
+        return view.getHintTextColors().getDefaultColor();
     }
 
     @Override
@@ -182,12 +202,27 @@ abstract class IMultiActionView<I extends IMultiActionView, T extends TextView> 
         return view.getTextColors().getDefaultColor();
     }
 
+    @Override
+    public void setTextColorAlpha(@IntRange(from = 0, to = 255) int alpha) {
+        view.setTextColor(view.getTextColors().withAlpha(alpha));
+    }
+
+    @Override
+    public void setHintColorAlpha(@IntRange(from = 0, to = 255) int alpha) {
+        view.setHintTextColor(view.getHintTextColors().withAlpha(alpha));
+    }
+
     public void setLinksColor(int color) {
         int oldData = getLinksColor();
         view.setLinkTextColor(color);
 
         if (propertyChangedListener != null)
             propertyChangedListener.onPropertyChanged(this, new PropertyChange<>(PROPERTY_LINKS_COLOR, oldData, color));
+    }
+
+    @Override
+    public void setTextSize(int unit, float size) {
+        view.setTextSize(unit, size);
     }
 
     public int getLinksColor() {
@@ -335,16 +370,14 @@ abstract class IMultiActionView<I extends IMultiActionView, T extends TextView> 
 
     @Override
     public void setVerticalScrollbarThumbDrawable(Drawable drawable) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             view.setVerticalScrollbarThumbDrawable(drawable);
-        }
     }
 
     @Override
     public void setVerticalScrollbarTrackDrawable(Drawable drawable) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             view.setVerticalScrollbarTrackDrawable(drawable);
-        }
     }
 
     @Override
@@ -356,9 +389,8 @@ abstract class IMultiActionView<I extends IMultiActionView, T extends TextView> 
     @Override
     public void setLineHeight(int height) {
         int oldData = getLineHeight();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
             view.setLineHeight(height);
-        }
 
         if (propertyChangedListener != null)
             propertyChangedListener.onPropertyChanged(this, new PropertyChange<>(PROPERTY_LINE_HEIGHT, oldData, getLineHeight()));

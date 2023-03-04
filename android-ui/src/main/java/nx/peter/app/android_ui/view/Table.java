@@ -198,7 +198,7 @@ public class Table extends AbstractView<Table> implements ITable<Table> {
         }
 
         public static class ViewHolder extends AbstractViewHolder {
-            MultiActionText cell;
+            StyledText cell;
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
                 cell = itemView.findViewById(R.id.cell);
@@ -212,6 +212,7 @@ public class Table extends AbstractView<Table> implements ITable<Table> {
     }
 
     public interface Item {
+
     }
 
     protected static class Header implements Item {
@@ -229,5 +230,6 @@ public class Table extends AbstractView<Table> implements ITable<Table> {
             this.data = data;
         }
     }
+
 
 }

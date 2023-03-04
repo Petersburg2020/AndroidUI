@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import nx.peter.app.android_ui.view.MultiActionView;
+import nx.peter.app.android_ui.view.StyledView;
 
 public class TextImage extends Text {
 	public Drawable image;
@@ -24,7 +24,7 @@ public class TextImage extends Text {
 			this.image.setColorFilter(tint, PorterDuff.Mode.SRC_ATOP);
 	}
 
-	public TextImage(CharSequence text, MultiActionView view, int image, @ColorInt int tint, float size, int start) {
+	public TextImage(CharSequence text, StyledView view, int image, @ColorInt int tint, float size, int start) {
 		super(text, Type.Image, view, start);
 		this.size = size;
 		this.image = view.getContext().getDrawable(image);

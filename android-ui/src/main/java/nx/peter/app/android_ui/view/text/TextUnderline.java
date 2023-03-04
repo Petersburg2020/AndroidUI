@@ -1,6 +1,6 @@
 package nx.peter.app.android_ui.view.text;
 
-import nx.peter.app.android_ui.view.MultiActionView;
+import nx.peter.app.android_ui.view.StyledView;
 
 public class TextUnderline extends Text {
 
@@ -8,7 +8,7 @@ public class TextUnderline extends Text {
 		super(text, Type.Underline, start);
 	}
 	
-	public TextUnderline(CharSequence text, MultiActionView view, int start) {
+	public TextUnderline(CharSequence text, StyledView view, int start) {
 		super(text, Type.Underline, view, start);
 	}
 	

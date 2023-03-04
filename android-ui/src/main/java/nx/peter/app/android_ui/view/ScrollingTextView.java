@@ -3,23 +3,13 @@ package nx.peter.app.android_ui.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.Gravity;
-import android.widget.TextView;
-import androidx.annotation.NonNull;
 import nx.peter.app.android_ui.R;
 import nx.peter.app.android_ui.view.text.*;
-import nx.peter.app.android_ui.view.text.FontFamily.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class ScrollingTextView extends IMultiActionText<ScrollingTextView> {
+public class ScrollingTextView extends AStyledText<ScrollingTextView> {
 
 
     public ScrollingTextView(Context context) {

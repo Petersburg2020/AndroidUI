@@ -7,12 +7,12 @@ import android.util.AttributeSet;
 import nx.peter.app.android_ui.R;
 import nx.peter.app.android_ui.view.text.Font;
 
-public class MultiActionText extends IMultiActionText<MultiActionText> {
-    public MultiActionText(Context context) {
+public class StyledText extends AStyledText<StyledText> {
+    public StyledText(Context context) {
         super(context);
     }
 
-    public MultiActionText(Context context, AttributeSet attrs) {
+    public StyledText(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -25,23 +25,23 @@ public class MultiActionText extends IMultiActionText<MultiActionText> {
         reset();
 
         if (attrs != null) {
-            @SuppressLint("Recycle") TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.MultiActionText);
+            @SuppressLint("Recycle") TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.StyledText);
 
             try {
-                float size = a.getDimensionPixelSize(R.styleable.MultiActionText_android_textSize, 16);
+                float size = a.getDimensionPixelSize(R.styleable.StyledText_android_textSize, 16);
                 setTextSize(size);
             } catch (Exception ignored) {
             }
 
             try {
-                String text = a.getString(R.styleable.MultiActionText_android_text);
+                String text = a.getString(R.styleable.StyledText_android_text);
                 if (text != null)
                     setText(text);
             } catch (Exception ignored) {
             }
 
             try {
-                int alignment = a.getInt(R.styleable.MultiActionText_alignment, -1);
+                int alignment = a.getInt(R.styleable.StyledText_alignment, -1);
                 switch (alignment) {
                     case 0:
                         setAlignment(Alignment.Center);
@@ -74,13 +74,13 @@ public class MultiActionText extends IMultiActionText<MultiActionText> {
             }
 
             try {
-                int color = a.getColor(R.styleable.MultiActionText_android_textColor, getTextColor());
+                int color = a.getColor(R.styleable.StyledText_android_textColor, getTextColor());
                 setTextColor(color);
             } catch (Exception ignored) {
             }
 
             try {
-                int style = a.getInt(R.styleable.MultiActionText_view_font_style, -1);
+                int style = a.getInt(R.styleable.StyledText_view_font_style, -1);
                 switch (style) {
                     case 0:
                         setFontStyle(Font.Style.Bold);
@@ -98,7 +98,7 @@ public class MultiActionText extends IMultiActionText<MultiActionText> {
             }
 
             try {
-                int background = a.getInt(R.styleable.MultiActionText_view_background, 11);
+                int background = a.getInt(R.styleable.StyledText_view_background, 11);
                 switch (background) {
                     case 0:
                         setBackground(Background.Black);

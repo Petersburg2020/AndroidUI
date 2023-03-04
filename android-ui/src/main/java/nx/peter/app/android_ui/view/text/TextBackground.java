@@ -1,6 +1,6 @@
 package nx.peter.app.android_ui.view.text;
 
-import nx.peter.app.android_ui.view.MultiActionView;
+import nx.peter.app.android_ui.view.StyledView;
 
 public class TextBackground extends Text {
 	public int color;
@@ -9,7 +9,7 @@ public class TextBackground extends Text {
 		this(text, null, color, start);
 	}
 
-	public TextBackground(CharSequence text, MultiActionView view, int color, int start) {
+	public TextBackground(CharSequence text, StyledView view, int color, int start) {
 		super(text, Type.Background, view, start);
 		this.color = color;
 	}

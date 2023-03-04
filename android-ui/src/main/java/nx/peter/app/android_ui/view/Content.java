@@ -1,4 +1,4 @@
-package nx.peter.app.android_ui.view.general;
+package nx.peter.app.android_ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-import nx.peter.app.android_ui.R;
-import nx.peter.app.android_ui.view.AbstractView;
-import nx.peter.app.android_ui.view.IView;
 
 public class Content<I extends View, V extends View> extends AbstractView<I> {
     protected Background background;

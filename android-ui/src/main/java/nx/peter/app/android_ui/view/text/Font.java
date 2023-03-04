@@ -47,7 +47,7 @@ public class Font {
     }
 
     public static void init(@NonNull Context context) {
-        if (running) {
+        if (!running) {
             SANS_SERIF = new Font(context, Typeface.SANS_SERIF);
             SERIF = new Font(context, Typeface.SERIF);
             MONOSPACE = new Font(context, Typeface.MONOSPACE);

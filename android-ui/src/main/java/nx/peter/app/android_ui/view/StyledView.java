@@ -1,13 +1,11 @@
 package nx.peter.app.android_ui.view;
 
 import android.os.Build;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.*;
 import android.view.View;
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.view.ViewGroup;
+import android.widget.MultiAutoCompleteTextView;
+import androidx.annotation.*;
 import nx.peter.app.android_ui.view.text.*;
 import nx.peter.app.android_ui.view.text.FontFamily.Family;
 import nx.peter.app.android_ui.view.text.FontFamily.Style;
@@ -16,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public interface MultiActionView<V extends View> extends IView<V> {
+public interface StyledView<V extends View> extends IView<V> {
     /**
      * Set text for this multi action view
      * @param text text to be displayed
@@ -24,12 +22,26 @@ public interface MultiActionView<V extends View> extends IView<V> {
     void setText(@NonNull CharSequence text);
 
     /**
+     * Set hint for this multi action view
+     * @param hint hint to be displayed
+     */
+    void setHint(@NonNull CharSequence hint);
+
+    /**
      * Set the text displayed color
      * @param color text displayed color
      */
-    void setTextColor(int color);
+    void setTextColor(@ColorInt int color);
+
+    void setTextColorAlpha(@IntRange(from = 0, to = 255) int alpha);
+
+    void setHintColor(@ColorInt int color);
+
+    void setHintColorAlpha(@IntRange(from = 0, to = 255) int alpha);
 
     void setTextSize(float size);
+
+    void setTextSize(int unit, float size);
 
     void setFont(@NonNull Font font);
 
@@ -41,7 +53,7 @@ public interface MultiActionView<V extends View> extends IView<V> {
 
     void setMaxLine(int lines);
 
-    void setLinksColor(int color);
+    void setLinksColor(@ColorInt int color);
 
     void appendText(@NonNull CharSequence text);
 
@@ -54,6 +66,8 @@ public interface MultiActionView<V extends View> extends IView<V> {
     void setLetterSpacing(float spacing);
 
     void setLinkClickable(boolean clickable);
+
+    void setLayoutParams(ViewGroup.LayoutParams params);
 
     void setOnTextChangedListener(OnTextChangedListener<V> listener);
 
@@ -91,9 +105,12 @@ public interface MultiActionView<V extends View> extends IView<V> {
 
     void addSubColors(int color, CharSequence... subs);
 
+    void addSubColors(TextColor... colors);
     void addSubFonts(@NonNull Font font, CharSequence... subs);
 
     void addSubFonts(Font.Style style, CharSequence... subs);
+
+    void addSubSizes(TextSize... colors);
 
     void addSubSizes(int size, CharSequence... subs);
 
@@ -151,7 +168,9 @@ public interface MultiActionView<V extends View> extends IView<V> {
 
     boolean isSingleLine();
 
-    int getTextColor();
+    @ColorInt int getTextColor();
+
+    @ColorInt int getHintColor();
 
     int getLinksColor();
 
@@ -168,6 +187,8 @@ public interface MultiActionView<V extends View> extends IView<V> {
     float getTextSize();
 
     CharSequence getText();
+
+    CharSequence getHint();
 
     Ellipsize getEllipsize();
 
@@ -263,15 +284,15 @@ public interface MultiActionView<V extends View> extends IView<V> {
     }
 
     interface OnLinkClickListener<V extends View> {
-        void onClickLink(@NonNull MultiActionView<V> view, CharSequence text, TextLink link);
+        void onClickLink(@NonNull StyledView<V> view, CharSequence text, TextLink link);
     }
 
     interface OnTextChangedListener<V extends View> {
-        void onTextChanged(MultiActionView<V> view, CharSequence oldText, CharSequence newText);
+        void onTextChanged(StyledView<V> view, CharSequence oldText, CharSequence newText);
     }
 
     interface OnPropertyChangedListener<V extends View> {
-        void onPropertyChanged(MultiActionView<V> view, PropertyChange<?> propertyChange);
+        void onPropertyChanged(StyledView<V> view, PropertyChange<?> propertyChange);
     }
 
     class SubTexts<T extends Text> implements Iterable<T> {
@@ -446,10 +467,10 @@ public interface MultiActionView<V extends View> extends IView<V> {
 
     class TextChangeListener<V extends View> implements TextWatcher {
         private final OnTextChangedListener<V> listener;
-        private final MultiActionView<V> view;
+        private final StyledView<V> view;
         private CharSequence old;
 
-        public TextChangeListener(MultiActionView<V> view, OnTextChangedListener<V> listener) {
+        public TextChangeListener(StyledView<V> view, OnTextChangedListener<V> listener) {
             this.listener = listener;
             this.view = view;
             old = "";
@@ -474,6 +495,129 @@ public interface MultiActionView<V extends View> extends IView<V> {
 
     }
 
+
+    /**
+     * Tokens refers to the suggestion triggers.
+     * Once a token is inputted in the editor, it automatically triggers
+     * auto suggestions popup.
+     */
+    enum Tokens {
+        /**
+         * A user defined token
+         */
+        Custom,
+
+        /**
+         * Comma token
+         */
+        Comma,
+
+        /**
+         * Dot token
+         */
+        Dot,
+
+        /**
+         * Space token
+         */
+        Space
+    }
+
+    /**
+     * CustomTokenizer - is a type of {@link Tokenizer} that takes user customized tokens as its token
+     */
+    class CustomTokenizer extends Tokenizer {
+        public CustomTokenizer(@NonNull String tokens) {
+            super(tokens);
+        }
+    }
+
+    /**
+     * DotTokenizer - is a type of {@link Tokenizer} that takes only dot as its token
+     */
+    class DotTokenizer extends Tokenizer {
+        public DotTokenizer() {
+            super(".");
+        }
+    }
+
+    /**
+     * CommaTokenizer - is a type of {@link Tokenizer} that takes only comma as its token
+     */
+    class CommaTokenizer extends Tokenizer {
+        public CommaTokenizer() {
+            super(",");
+        }
+    }
+
+    /**
+     * SpaceTokenizer - is a type of {@link Tokenizer} that takes only spaces as its token
+     */
+    class SpaceTokenizer extends Tokenizer {
+        public SpaceTokenizer() {
+            super(" ");
+        }
+    }
+
+
+
+    /**
+     * As this Java abstract class implements {@link MultiAutoCompleteTextView.Tokenizer} interface,
+     * it also implements its 3 methods i.e. <b>findTokenStart</b>, <b>findTokenEnd</b> and <b>terminateToken</b>.
+     * The Tokenizer helps tell the Editor, using some defined tokens, when to trigger suggestion popups while
+     * editing texts.
+     */
+    abstract class Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
+        protected String tokens;
+
+        public Tokenizer(@NonNull String tokens) {
+            this.tokens = tokens;
+        }
+
+        protected boolean contains(char letter) {
+            return tokens.contains(letter + "");
+        }
+
+        // Returns the start of the token that ends at offset cursor within text.
+        public int findTokenStart(CharSequence inputText, int cursor) {
+            int idx = cursor;
+
+            while (idx > 0 && !contains(inputText.charAt(idx - 1))) idx--;
+
+            while (idx < cursor && contains(inputText.charAt(idx))) idx++;
+
+            return idx;
+        }
+
+        // Returns the end of the token (minus trailing punctuation) that
+        // begins at offset cursor within text.
+        public int findTokenEnd(CharSequence inputText, int cursor) {
+            int idx = cursor;
+            int length = inputText.length();
+
+            while (idx < length)
+                if (contains(inputText.charAt(idx))) return idx;
+                else idx++;
+
+            return length;
+        }
+
+        // Returns text, modified, if necessary, to ensure that it ends with a token terminator
+        // (for example a space or comma).
+        public CharSequence terminateToken(CharSequence inputText) {
+            int idx = inputText.length();
+            while (idx > 0 && contains(inputText.charAt(idx - 1))) idx--;
+
+            if (idx > 0 && contains(inputText.charAt(idx - 1))) return inputText;
+            else {
+                if (inputText instanceof Spanned) {
+                    SpannableString sp = new SpannableString(inputText + " ");
+                    TextUtils.copySpansFrom((Spanned) inputText, 0, inputText.length(), Object.class, sp, 0);
+                    return sp;
+                } else return inputText + " ";
+            }
+        }
+    }
 
     String PROPERTY_TEXT = "TEXT";
     String PROPERTY_FONT = "FONT";

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-public abstract class AbstractLayout<A extends AbstractLayout, V extends View> extends AbstractView<A> implements ILayout<A, V> {
+abstract class AbstractLayout<A extends AbstractLayout, V extends View> extends AbstractView<A> implements ILayout<A, V> {
 
   public AbstractLayout(Context c) {
     super(c);

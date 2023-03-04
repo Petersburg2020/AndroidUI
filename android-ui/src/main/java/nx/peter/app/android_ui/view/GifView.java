@@ -326,6 +326,7 @@ public class GifView extends View implements IView<GifView> {
   }
 */
 
+    @SuppressLint("NewApi")
     public void setFile(File file) {
         try {
             setInput(new BufferedInputStream(Files.newInputStream(file.toPath()), 32768));
@@ -433,6 +434,46 @@ public class GifView extends View implements IView<GifView> {
     @Override
     public void setPadding(int padding) {
         setPadding(padding, padding);
+    }
+
+    @Override
+    public void setPaddingTop(int padding) {
+        setPadding(getPaddingLeft(), padding, getPaddingRight(), getPaddingBottom());
+    }
+
+    @Override
+    public void setPaddingLeft(int padding) {
+        setPadding(padding, getPaddingTop(), getPaddingRight(), getPaddingBottom());
+    }
+
+    @Override
+    public void setPaddingRight(int padding) {
+        setPadding(getPaddingLeft(), getPaddingTop(), padding, getPaddingBottom());
+    }
+
+    @Override
+    public void setPaddingBottom(int padding) {
+        setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), padding);
+    }
+
+    @Override
+    public void setScale(float scale) {
+        setScale(scale, scale);
+    }
+
+    @Override
+    public void setScaleX(float scaleX) {
+        setSize((int) (scaleX * getViewWidth()), getViewHeight());
+    }
+
+    @Override
+    public void setScaleY(float scaleY) {
+        setSize(getViewWidth(), (int) (scaleY * getViewHeight()));
+    }
+
+    @Override
+    public void setScale(float x, float y) {
+        setSize((int) (x * getViewWidth()), (int) (y * getViewHeight()));
     }
 
     @Override

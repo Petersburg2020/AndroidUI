@@ -1,12 +1,15 @@
 package nx.peter.app.android_ui.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleableRes;
 import nx.peter.app.android_ui.R;
 import nx.peter.app.android_ui.view.util.Padding;
 import nx.peter.app.android_ui.view.util.Scale;
@@ -14,7 +17,7 @@ import nx.peter.app.android_ui.view.util.Size;
 
 import java.util.Arrays;
 
-public abstract class AbstractView<V extends View> extends LinearLayout implements IView<V> {
+abstract class AbstractView<V extends View> extends LinearLayout implements IView<V> {
     protected Background background;
 
     public AbstractView(Context context) {
@@ -29,6 +32,10 @@ public abstract class AbstractView<V extends View> extends LinearLayout implemen
     protected abstract void init(AttributeSet attrs);
 
     protected abstract void reset();
+
+    protected TypedArray obtainStyledAttributes(@Nullable AttributeSet attrs, @NonNull @StyleableRes int[] styledAttrs) {
+        return getContext().obtainStyledAttributes(attrs, styledAttrs);
+    }
 
     @Override
     public V getView() {
@@ -62,6 +69,26 @@ public abstract class AbstractView<V extends View> extends LinearLayout implemen
         ViewGroup.LayoutParams lp = getLayoutParams();
         lp.height = height;
         setLayoutParams(lp);
+    }
+
+    @Override
+    public void setScale(float scale) {
+        setScale(scale, scale);
+    }
+
+    @Override
+    public void setScaleX(float scaleX) {
+        setSize((int) (scaleX * getViewWidth()), getViewHeight());
+    }
+
+    @Override
+    public void setScaleY(float scaleY) {
+        setSize(getViewWidth(), (int) (scaleY * getViewHeight()));
+    }
+
+    @Override
+    public void setScale(float x, float y) {
+        setSize((int) (x * getViewWidth()), (int) (y * getViewHeight()));
     }
 
     @Override
@@ -114,6 +141,26 @@ public abstract class AbstractView<V extends View> extends LinearLayout implemen
     @Override
     public void setPadding(int padding) {
         setPadding(padding, padding);
+    }
+
+    @Override
+    public void setPaddingTop(int padding) {
+        setPadding(getPaddingLeft(), padding, getPaddingRight(), getPaddingBottom());
+    }
+
+    @Override
+    public void setPaddingLeft(int padding) {
+        setPadding(padding, getPaddingTop(), getPaddingRight(), getPaddingBottom());
+    }
+
+    @Override
+    public void setPaddingRight(int padding) {
+        setPadding(getPaddingLeft(), getPaddingTop(), padding, getPaddingBottom());
+    }
+
+    @Override
+    public void setPaddingBottom(int padding) {
+        setPadding(getPaddingLeft(), getPaddingTop(), getPaddingRight(), padding);
     }
 
     @Override

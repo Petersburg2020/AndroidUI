@@ -12,10 +12,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.annotation.*;
 import nx.peter.app.android_ui.R;
 import nx.peter.app.android_ui.view.text.*;
 import nx.peter.app.android_ui.view.text.FontFamily.*;
@@ -23,9 +20,9 @@ import nx.peter.app.android_ui.view.util.Size;
 
 import java.util.List;
 
-public class ImageTextButton extends AbstractView<ImageTextButton> implements MultiActionView<ImageTextButton> {
+public class ImageTextButton extends AbstractView<ImageTextButton> implements StyledView<ImageTextButton> {
     private ImageView imageView;
-    private MultiActionText view;
+    private StyledText view;
     private LinearLayout layout;
     private Background background;
     private OnTextChangedListener<ImageTextButton> textChanged;
@@ -51,7 +48,7 @@ public class ImageTextButton extends AbstractView<ImageTextButton> implements Mu
         float sp = res.getDisplayMetrics().scaledDensity;
 
         if (attrs != null) {
-            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ImageTextButton);
+            TypedArray a = obtainStyledAttributes(attrs, R.styleable.ImageTextButton);
 
             try {
                 String text = a.getString(R.styleable.ImageTextButton_android_text);
@@ -123,18 +120,6 @@ public class ImageTextButton extends AbstractView<ImageTextButton> implements Mu
     protected void reset() {
         propertyChanged = null;
         textChanged = null;
-        OnLinkClickListener<ImageTextButton> linkClick = null;
-        
-        /*
-        view.setOnPropertyChangedListener(
-            new OnPropertyChangedListener<MultiActionText>() {
-                @Override
-                public void onPropertyChanged(MultiActionText v, PropertyChange change) {
-                    if (propertyChanged != null) propertyChanged.onPropertyChanged(ImageTextButton.this, change);
-                }
-            }
-        );
-        */
 
 
         setBackground(Background.Transparent);
@@ -143,6 +128,29 @@ public class ImageTextButton extends AbstractView<ImageTextButton> implements Mu
         setTextSize(16);
         // setImage(R.drawable.ic_launcher_background);
         setImageSize(20);
+    }
+
+    public void setHint(@NonNull CharSequence hint) {
+        view.setHint(hint);
+    }
+
+    public CharSequence getHint() {
+        return view.getHint();
+    }
+
+    @Override
+    public void setHintColor(@ColorInt int color) {
+        view.setHintColor(color);
+    }
+
+    @Override
+    public void setHintColorAlpha(@IntRange(from = 0, to = 255) int alpha) {
+        view.setHintColorAlpha(alpha);
+    }
+
+    @Override
+    public int getHintColor() {
+        return view.getHintColor();
     }
 
     @Override
@@ -171,6 +179,11 @@ public class ImageTextButton extends AbstractView<ImageTextButton> implements Mu
 
     public void setTextColor(@ColorInt int color) {
         view.setTextColor(color);
+    }
+
+    @Override
+    public void setTextColorAlpha(@IntRange(from = 0, to = 255) int alpha) {
+        view.setTextColorAlpha(alpha);
     }
 
     public int getTextColor() {
@@ -512,7 +525,6 @@ public class ImageTextButton extends AbstractView<ImageTextButton> implements Mu
         propertyChanged = listener;
     }
 
-
     @Override
     public OnTextChangedListener<ImageTextButton> getOnTextChangedListener() {
         return textChanged;
@@ -561,6 +573,11 @@ public class ImageTextButton extends AbstractView<ImageTextButton> implements Mu
     @Override
     public void setTextSize(float size) {
         view.setTextSize(size);
+    }
+
+    @Override
+    public void setTextSize(int unit, float size) {
+        view.setTextSize(unit, size);
     }
 
     public float getTextSize() {

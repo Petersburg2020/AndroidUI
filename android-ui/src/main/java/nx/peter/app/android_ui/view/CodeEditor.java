@@ -17,11 +17,11 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CodeEditor extends AbstractView<CodeEditor> {
-    protected MultiActionEditor editor;
-    protected MultiActionText lineNumber;
+    protected StyledEditor editor;
+    protected StyledText lineNumber;
     protected LinearLayout divider;
     protected Theme theme;
-    protected ThemeData data;
+    protected IThemeData data;
     protected IKeywords keywords;
     protected CharSequence text;
     protected Formatter formatter;
@@ -144,7 +144,7 @@ public class CodeEditor extends AbstractView<CodeEditor> {
         // editor.clearSuggestions();
         // editor.addSuggestions(keywords.getKeywords());
 
-        data = getTheme(theme);
+        data = (IThemeData) getTheme(theme);
         setBackground(data.background);
 
         keywords();
@@ -162,7 +162,7 @@ public class CodeEditor extends AbstractView<CodeEditor> {
     protected void keywords() {
         if (keywords.isNotEmpty())
             for (Function function : keywords.getFunctions()) {
-                IKeywords k = ((IKeywords)keywords.getByFunction(function));
+                IKeywords k = ((IKeywords) keywords.getByFunction(function));
                 int color = data.getColor(function);
                 k.setColor(color);
 
@@ -353,7 +353,7 @@ public class CodeEditor extends AbstractView<CodeEditor> {
     @SuppressLint("StaticFieldLeak")
     protected static Context context;
 
-    public static final ThemeData NORMAL_THEME = new ThemeData(
+    public static final ThemeData NORMAL_THEME = new IThemeData(
             Color.GREEN,
             Constant.PINK,
             Constant.BLUE_LIGHT,
@@ -361,7 +361,7 @@ public class CodeEditor extends AbstractView<CodeEditor> {
             Constant.LIME
     );
 
-    public static final ThemeData ARIAKE_DARK = new ThemeData(
+    public static final ThemeData ARIAKE_DARK = new IThemeData(
             Constant.PURPLE_LIGHT,
             Constant.BLUE_LIGHT,
             Constant.PINK,
@@ -369,7 +369,7 @@ public class CodeEditor extends AbstractView<CodeEditor> {
             Constant.PURPLE
     );
 
-    public static final ThemeData NIGHT_OWL = new ThemeData(
+    public static final ThemeData NIGHT_OWL = new IThemeData(
             Constant.VIOLET,
             Constant.LIME,
             Constant.ORANGE,
@@ -377,7 +377,7 @@ public class CodeEditor extends AbstractView<CodeEditor> {
             Constant.PINK
     );
 
-    public static final ThemeData DRACULA = new ThemeData(
+    public static final ThemeData DRACULA = new IThemeData(
             Constant.PINK,
             Constant.LIME,
             Constant.PURPLE_LIGHT,
@@ -385,12 +385,17 @@ public class CodeEditor extends AbstractView<CodeEditor> {
             Color.CYAN
     );
 
-    public static class ThemeData {
+
+    public interface ThemeData {
+        int getColor(@NonNull Function function);
+    }
+
+    protected static class IThemeData implements ThemeData {
         public final Background background;
         @ColorInt
         public final int Klass, Method, Function, Accessibility, NativeDataType, StringType, Others, Normal, Comment;
 
-        public ThemeData(
+        public IThemeData(
                 @ColorInt int klass,
                 @ColorInt int method,
                 @ColorInt int nativeDataType,
@@ -400,7 +405,7 @@ public class CodeEditor extends AbstractView<CodeEditor> {
             this(klass, method, method, klass, nativeDataType, stringType, others);
         }
 
-        public ThemeData(
+        public IThemeData(
                 @ColorInt int klass,
                 @ColorInt int method,
                 @ColorInt int function,
@@ -412,7 +417,7 @@ public class CodeEditor extends AbstractView<CodeEditor> {
             this(Background.Black, klass, method, function, accessibility, nativeDataType, stringType, others, Color.WHITE, Constant.GREY_LIGHT);
         }
 
-        public ThemeData(
+        public IThemeData(
                 @NonNull Background background,
                 @ColorInt int klass,
                 @ColorInt int method,
@@ -423,7 +428,7 @@ public class CodeEditor extends AbstractView<CodeEditor> {
             this(background, klass, method, method, klass, nativeDataType, stringType, others);
         }
 
-        public ThemeData(
+        public IThemeData(
                 @NonNull Background background,
                 @ColorInt int klass,
                 @ColorInt int method,
@@ -436,7 +441,7 @@ public class CodeEditor extends AbstractView<CodeEditor> {
             this(background, klass, method, function, accessibility, nativeDataType, stringType, others, Color.WHITE, Constant.GREY_LIGHT);
         }
 
-        public ThemeData(
+        public IThemeData(
                 Background background,
                 @ColorInt int klass,
                 @ColorInt int method,

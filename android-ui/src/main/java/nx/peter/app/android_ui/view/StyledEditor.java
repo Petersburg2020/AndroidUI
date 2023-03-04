@@ -1,19 +1,20 @@
 package nx.peter.app.android_ui.view;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import nx.peter.app.android_ui.R;
 import nx.peter.app.android_ui.view.text.Font;
 
-public class MultiActionEditor extends IMultiActionEditor<MultiActionEditor> {
+public class StyledEditor extends AStyledEditor<StyledEditor> {
 
-    public MultiActionEditor(Context context) {
+    public StyledEditor(Context context) {
         super(context);
     }
 
-    public MultiActionEditor(Context context, AttributeSet attrs) {
+    public StyledEditor(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -24,23 +25,47 @@ public class MultiActionEditor extends IMultiActionEditor<MultiActionEditor> {
         reset();
 
         if (attrs != null) {
-            @SuppressLint("Recycle") TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.MultiActionEditor);
+            TypedArray a = obtainStyledAttributes(attrs, R.styleable.StyledEditor);
+
+            float screenDensity  = Resources.getSystem().getDisplayMetrics().density;
 
             try {
-                float size = a.getDimensionPixelSize(R.styleable.MultiActionEditor_android_textSize, 16);
-                setTextSize(size);
+                float size = a.getDimension(R.styleable.StyledEditor_android_textSize, Resources.getSystem().getDimension(R.dimen.text_size));
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, size/screenDensity);
             } catch (Exception ignored) {
             }
 
             try {
-                String text = a.getString(R.styleable.MultiActionEditor_android_text);
+                float scale = a.getFloat(R.styleable.StyledEditor_scale, 1);
+                setScale(scale);
+            } catch (Exception ignored) {}
+
+            try {
+                float scale = a.getFloat(R.styleable.StyledEditor_scale_x, 1);
+                setScaleX(scale);
+            } catch (Exception ignored) {}
+
+            try {
+                float scale = a.getFloat(R.styleable.StyledEditor_scale_y, 1);
+                setScaleY(scale);
+            } catch (Exception ignored) {}
+
+            try {
+                String text = a.getString(R.styleable.StyledEditor_android_text);
                 if (text != null)
                     setText(text);
             } catch (Exception ignored) {
             }
 
             try {
-                int alignment = a.getInt(R.styleable.MultiActionEditor_alignment, -1);
+                String hint = a.getString(R.styleable.StyledEditor_android_hint);
+                if (hint != null)
+                    setHint(hint);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int alignment = a.getInt(R.styleable.StyledEditor_alignment, -1);
                 switch (alignment) {
                     case 0:
                         setAlignment(Alignment.Center);
@@ -73,13 +98,19 @@ public class MultiActionEditor extends IMultiActionEditor<MultiActionEditor> {
             }
 
             try {
-                int color = a.getColor(R.styleable.MultiActionEditor_android_textColor, getTextColor());
+                int color = a.getColor(R.styleable.StyledEditor_android_textColor, getTextColor());
                 setTextColor(color);
             } catch (Exception ignored) {
             }
 
             try {
-                int style = a.getInt(R.styleable.MultiActionEditor_view_font_style, -1);
+                int color = a.getColor(R.styleable.StyledEditor_android_textColorHint, getTextColor());
+                setHintColor(color);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int style = a.getInt(R.styleable.StyledEditor_view_font_style, -1);
                 switch (style) {
                     case 0:
                         setFontStyle(Font.Style.Bold);
@@ -97,7 +128,7 @@ public class MultiActionEditor extends IMultiActionEditor<MultiActionEditor> {
             }
 
             try {
-                int background = a.getInt(R.styleable.MultiActionEditor_view_background, 11);
+                int background = a.getInt(R.styleable.StyledEditor_view_background, 11);
                 switch (background) {
                     case 0:
                         setBackground(Background.Black);
@@ -138,14 +169,24 @@ public class MultiActionEditor extends IMultiActionEditor<MultiActionEditor> {
             } catch (Exception ignored) {
             }
 
+            a.close();
         }
     }
 
     @Override
     protected void reset() {
         super.reset();
+        setText("");
+        setHint("Here is a sample hint...");
         setAlignment(Alignment.TopLeft);
+        setPadding(20);
+        // setBackground(Background.Black);
+        // setFont(Font.BEFORE_THE_RAIN);
+    }
 
+    @Override
+    public void setBackgroundResource(int resid) {
+        view.setBackgroundResource(resid);
     }
 }
 

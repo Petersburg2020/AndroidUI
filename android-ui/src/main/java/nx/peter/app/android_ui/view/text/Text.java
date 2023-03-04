@@ -1,10 +1,10 @@
 package nx.peter.app.android_ui.view.text;
 
 import androidx.annotation.NonNull;
-import nx.peter.app.android_ui.view.MultiActionView;
+import nx.peter.app.android_ui.view.StyledView;
 
 public abstract class Text {
-	public MultiActionView view;
+	public StyledView view;
 	public final String text;
 	public final Type type;
 	public int start, end;
@@ -13,7 +13,7 @@ public abstract class Text {
 		this(text, type, null, start);
 	}
 
-	public Text(CharSequence text, Type type, MultiActionView view, int start) {
+	public Text(CharSequence text, Type type, StyledView view, int start) {
 		this.text = text.toString();
 		this.type = type;
 		this.start = start;

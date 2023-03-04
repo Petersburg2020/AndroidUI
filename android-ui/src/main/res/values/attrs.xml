@@ -26,7 +26,7 @@
         <attr name="image_text_margin" format="dimension"/>
     </declare-styleable>
 
-    <declare-styleable name="MultiActionText">
+    <declare-styleable name="StyledText">
         <attr name="linkText" format="string"/>
         <attr name="subColorText" format="string"/>
         <attr name="subFontText" format="string"/>
@@ -44,6 +44,33 @@
             <enum name="sans_italic" value="7"/>
             <enum name="monospace_italic" value="8"/>
         </attr>
+        <attr name="view_padding" format="dimension" />
+        <attr name="view_padding_start" format="dimension" />
+        <attr name="view_padding_end" format="dimension" />
+        <attr name="view_padding_top" format="dimension" />
+        <attr name="view_padding_bottom" format="dimension" />
+        <attr name="view_padding_horizontal" format="dimension" />
+        <attr name="view_padding_vertical" format="dimension" />
+        <attr name="scale_x" format="float"/>
+        <attr name="scale_y" format="float"/>
+        <attr name="scale" format="float"/>
+        <attr name="hintColorAlpha" format="integer"/>
+        <attr name="textColorAlpha" format="integer"/>
+        <attr name="textColor" format="enum">
+            <enum value="0" name="black"/>
+            <enum value="1" name="gray"/>
+            <enum value="2" name="white"/>
+            <enum value="3" name="red" />
+            <enum value="4" name="blue" />
+            <enum value="5" name="green" />
+            <enum value="6" name="yellow" />
+            <enum value="7" name="orange" />
+            <enum value="8" name="purple" />
+            <enum value="9" name="pink"/>
+            <enum value="10" name="brown"/>
+            <enum value="11" name="cyan"/>
+            <enum value="12" name="lime"/>
+        </attr>
         <attr name="view_background" format="enum">
             <enum value="11" name="transparent" />
             <enum value="0" name="black"/>
@@ -57,6 +84,8 @@
             <enum value="8" name="purple" />
             <enum value="9" name="pink"/>
             <enum value="10" name="brown"/>
+            <enum value="12" name="cyan"/>
+            <enum value="13" name="lime"/>
         </attr>
         <!-- Name of the method in this View's context to invoke when the linkText is
              clicked. This name must correspond to a public method that takes
@@ -70,6 +99,7 @@
             <enum name="serif" value="1"/>
             <enum name="cursive" value="2" />
             <enum name="casual" value="3"/>
+            <enum name="monospace" value="4"/>
         </attr>
         <attr name="android:text"/>
         <attr name="android:textColor"/>
@@ -107,7 +137,7 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="MultiActionEditor">
+    <declare-styleable name="StyledEditor">
         <attr name="linkText"/>
         <attr name="subColorText"/>
         <attr name="subFontText"/>
@@ -115,6 +145,19 @@
         <attr name="subColor"/>
         <attr name="subSize"/>
         <attr name="subFont"/>
+        <attr name="view_padding"/>
+        <attr name="view_padding_top"/>
+        <attr name="view_padding_end"/>
+        <attr name="view_padding_start"/>
+        <attr name="view_padding_bottom"/>
+        <attr name="view_padding_vertical"/>
+        <attr name="view_padding_horizontal"/>
+        <attr name="scale"/>
+        <attr name="scale_x"/>
+        <attr name="scale_y"/>
+        <attr name="textColor"/>
+        <attr name="textColorAlpha"/>
+        <attr name="hintColorAlpha"/>
         <attr name="view_background"/>
         <!-- Name of the method in this View's context to invoke when the linkText is
              clicked. This name must correspond to a public method that takes
@@ -123,6 +166,7 @@
              <code>public void sayHello(View v)</code> method of your context
              (typically, your Activity). -->
         <attr name="link"/>
+        <attr name="font_family"/>
         <attr name="android:hint"/>
         <attr name="android:textColorHint"/>
         <attr name="android:text"/>
@@ -153,6 +197,19 @@
         <attr name="subColor"/>
         <attr name="subSize"/>
         <attr name="subFont"/>
+        <attr name="view_padding"/>
+        <attr name="view_padding_top"/>
+        <attr name="view_padding_end"/>
+        <attr name="view_padding_start"/>
+        <attr name="view_padding_bottom"/>
+        <attr name="view_padding_vertical"/>
+        <attr name="view_padding_horizontal"/>
+        <attr name="scale"/>
+        <attr name="scale_x"/>
+        <attr name="scale_y"/>
+        <attr name="textColor"/>
+        <attr name="textColorAlpha"/>
+        <attr name="hintColorAlpha"/>
         <attr name="view_background"/>
         <!-- Name of the method in this View's context to invoke when the linkText is
              clicked. This name must correspond to a public method that takes
@@ -161,6 +218,7 @@
              <code>public void sayHello(View v)</code> method of your context
              (typically, your Activity). -->
         <attr name="link"/>
+        <attr name="font_family"/>
         <attr name="android:hint"/>
         <attr name="android:textColorHint"/>
         <attr name="android:text"/>
@@ -191,6 +249,53 @@
     <declare-styleable name="GifView">
         <attr name="paused" format="boolean"/>
         <attr name="gif" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="StyledScrollableText">
+        <attr name="linkText"/>
+        <attr name="subColorText"/>
+        <attr name="subFontText"/>
+        <attr name="subSizeText"/>
+        <attr name="subColor"/>
+        <attr name="subSize"/>
+        <attr name="subFont"/>
+        <attr name="view_padding"/>
+        <attr name="view_padding_top"/>
+        <attr name="view_padding_end"/>
+        <attr name="view_padding_start"/>
+        <attr name="view_padding_bottom"/>
+        <attr name="view_padding_vertical"/>
+        <attr name="view_padding_horizontal"/>
+        <attr name="scale"/>
+        <attr name="scale_x"/>
+        <attr name="scale_y"/>
+        <attr name="textColor"/>
+        <attr name="textColorAlpha"/>
+        <attr name="hintColorAlpha"/>
+        <attr name="view_background"/>
+        <!-- Name of the method in this View's context to invoke when the linkText is
+             clicked. This name must correspond to a public method that takes
+             exactly one parameter of type View. For instance, if you specify
+             <code>link="sayHello"</code>, you must declare a
+             <code>public void sayHello(View v)</code> method of your context
+             (typically, your Activity). -->
+        <attr name="link"/>
+        <attr name="font_family"/>
+        <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+        <attr name="android:textColorLink"/>
+        <attr name="view_font_style"/>
+        <attr name="android:typeface"/>
+        <attr name="horizontal_alignment"/>
+        <attr name="view_width"/>
+        <attr name="view_height"/>
+        <attr name="alignment"/>
+        <attr name="scroll_direction" format="enum">
+            <enum name="vertical" value="0" />
+            <enum name="horizontal" value="1" />
+            <enum name="both" value="2" />
+        </attr>
     </declare-styleable>
 
 </resources>

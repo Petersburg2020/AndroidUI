@@ -10,7 +10,7 @@ import android.view.View;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import nx.peter.app.android_ui.view.MultiActionView;
+import nx.peter.app.android_ui.view.StyledView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +107,7 @@ public class SpannableTextFormat {
 	
 
 	@NonNull
-	public static SpanText getLinkSpan(SpannableString span, CharSequence text, MultiActionView.OnLinkClickListener<?> link, @NonNull CharSequence... subs) {
+	public static SpanText getLinkSpan(SpannableString span, CharSequence text, StyledView.OnLinkClickListener<?> link, @NonNull CharSequence... subs) {
 		List<TextLink> links = new ArrayList<>();
 		for(CharSequence sub : subs) {
 			int start = text.toString().indexOf(sub.toString());

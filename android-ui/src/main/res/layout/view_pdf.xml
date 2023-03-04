@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <WebView
+    <nx.peter.app.android_ui.view.StyledScrollableText
             android:id="@+id/pdf_view"
+            app:view_background="orange"
+            app:view_padding="10dp"
+            app:textColor="white"
+            app:alignment="top_left"
+            app:font_family="monospace"
+            app:view_font_style="bold"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
+
 </LinearLayout>

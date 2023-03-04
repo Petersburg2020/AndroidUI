@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <nx.peter.app.android_ui.view.MultiActionText
+        <nx.peter.app.android_ui.view.StyledText
                 android:id="@+id/text"
                 android:textColor="@color/black"
                 android:text="@string/tree_view_item"
