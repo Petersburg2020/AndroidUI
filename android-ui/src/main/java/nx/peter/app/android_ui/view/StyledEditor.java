@@ -20,7 +20,7 @@ public class StyledEditor extends AStyledEditor<StyledEditor> {
 
     @Override
     protected void init(AttributeSet attrs) {
-        inflate(getContext(), R.layout.view_multi_action_editor, this);
+        inflate(getContext(), R.layout.view_styled_editor, this);
         view = findViewById(R.id.view);
         reset();
 

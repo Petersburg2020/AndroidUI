@@ -18,24 +18,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Table extends AbstractView<Table> implements ITable<Table> {
+public class StyledTable extends AbstractView<StyledTable> implements ITable<StyledTable> {
     protected TableView table;
     protected TableAdapter adapter;
     protected int columnCount;
     protected List<String> rowHeadings, columnHeadings;
     protected List<List<Object>> cells;
 
-    public Table(Context context) {
+    public StyledTable(Context context) {
         super(context);
     }
 
-    public Table(Context context, AttributeSet attrs) {
+    public StyledTable(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
     protected void init(AttributeSet attrs) {
-        inflate(getContext(), R.layout.view_multi_action_table, this);
+        inflate(getContext(), R.layout.view_styled_table, this);
         table = findViewById(R.id.table);
         reset();
 

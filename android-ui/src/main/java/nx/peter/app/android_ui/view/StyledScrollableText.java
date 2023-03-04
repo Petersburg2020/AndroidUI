@@ -25,7 +25,7 @@ public class StyledScrollableText extends AStyledScrollableView<StyledScrollable
     @SuppressLint("Range")
     @Override
     protected void init(AttributeSet attrs) {
-        inflate(getContext(), R.layout.view_multi_action_scrollable_text, this);
+        inflate(getContext(), R.layout.view_styled_scrollable_text, this);
         vView = findViewById(R.id.v_view);
         hView = findViewById(R.id.h_view);
         vhView = findViewById(R.id.vh_view);

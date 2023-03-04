@@ -18,7 +18,7 @@ public class StyledText extends AStyledText<StyledText> {
 
     @Override
     protected void init(AttributeSet attrs) {
-        inflate(getContext(), R.layout.view_multi_action_text, this);
+        inflate(getContext(), R.layout.view_styled_text, this);
         view = findViewById(R.id.text);
         // Font.init(getContext());
 
