@@ -54,10 +54,13 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-                // from components.metaClass
                 groupId = 'com.github.Petersburg2020' as Publication
                 artifactId = 'android-ui' as Publication
                 version = '1.0.0' as Publication
+
+                afterEvaluate {
+                    from components.release
+                }
             }
         }
     }
