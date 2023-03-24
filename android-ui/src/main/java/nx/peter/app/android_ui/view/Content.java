@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
-public class Content<I extends View, V extends View> extends AbstractView<I> {
+public class Content<I extends View, V extends View> extends AView<I> {
     protected Background background;
 
     public Content(Context context) {

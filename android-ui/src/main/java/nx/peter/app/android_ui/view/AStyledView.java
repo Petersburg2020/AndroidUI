@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-abstract class AStyledView<I extends AStyledView, T extends TextView> extends AbstractView<I> implements StyledView<I> {
+abstract class AStyledView<I extends AStyledView, T extends TextView> extends AView<I> implements StyledView<I> {
     protected T view;
     protected SpannableString span;
     protected String text;
@@ -950,7 +950,7 @@ abstract class AStyledView<I extends AStyledView, T extends TextView> extends Ab
         underlines = new ArrayList<>();
         urls = new ArrayList<>();
 
-        List<Text> oldData = subTexts;
+        List<Text> oldData = new ArrayList<>(subTexts);
         for (Text sub : subTexts) {
             switch (sub.type) {
                 case Background:

@@ -246,6 +246,10 @@
         <attr name="y" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="CandleStick">
+
+    </declare-styleable>
+
     <declare-styleable name="GifView">
         <attr name="paused" format="boolean"/>
         <attr name="gif" format="reference"/>

@@ -17,14 +17,14 @@ import nx.peter.app.android_ui.view.util.Size;
 
 import java.util.Arrays;
 
-abstract class AbstractView<V extends View> extends LinearLayout implements IView<V> {
+abstract class AView<V extends View> extends LinearLayout implements IView<V> {
     protected Background background;
 
-    public AbstractView(Context context) {
+    public AView(Context context) {
         this(context, null);
     }
 
-    public AbstractView(Context context, AttributeSet attrs) {
+    public AView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }

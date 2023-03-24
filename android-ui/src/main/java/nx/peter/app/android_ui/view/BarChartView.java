@@ -1,4 +1,4 @@
-package nx.peter.app.android_ui.view.chart;
+package nx.peter.app.android_ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,7 +8,6 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import nx.peter.app.android_ui.R;
-import nx.peter.app.android_ui.view.ChartView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +34,13 @@ public class BarChartView
     @Override
     protected void reset() {
         super.reset();
+
+        setTitle("Shapes");
+        setColorSwatch(ColorSwatch.Material);
+        addData("Square", 0.7f, 1.5f);
+        addData("Circle", 0.8f, 2.5f);
+        addData("Rectangle", 0.6f, 1.8f);
+
         // chart.animateXY(0,0, Easing.EaseInBounce);
     }
 

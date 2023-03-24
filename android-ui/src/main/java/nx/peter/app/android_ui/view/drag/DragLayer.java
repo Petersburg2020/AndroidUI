@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import nx.peter.app.android_ui.view.AbsoluteLayout;
 
 /**
  * A ViewGroup that coordinates dragging across its dscendants.
@@ -170,7 +171,7 @@ public class DragLayer<V extends View> extends AbsoluteLayout implements DragSou
      * or if this target doesn't provide estimations.
      */
     public Rect estimateDropLocation(DragSource<V> source, int x, int y, int xOffset, int yOffset, DragView<V> dragView, Object dragInfo, Rect recycle) {
-        return null;
+        return new Rect(x, y, x + xOffset, y + yOffset);
     }
 
     // More methods

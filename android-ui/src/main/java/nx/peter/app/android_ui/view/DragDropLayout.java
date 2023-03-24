@@ -13,9 +13,8 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import nx.peter.app.android_ui.R;
-import nx.peter.app.android_ui.view.drag.AbsoluteLayout;
 
-public class DragDropLayout extends AbstractLayout<DragDropLayout, View> {
+public class DragDropLayout extends ALayout<DragDropLayout, View> {
     protected AbsoluteLayout layer;
 
 

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class StyledTable extends AbstractView<StyledTable> implements ITable<StyledTable> {
+public class StyledTable extends AView<StyledTable> implements ITable<StyledTable> {
     protected TableView table;
     protected TableAdapter adapter;
     protected int columnCount;

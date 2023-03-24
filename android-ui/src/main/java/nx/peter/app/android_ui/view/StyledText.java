@@ -20,8 +20,6 @@ public class StyledText extends AStyledText<StyledText> {
     protected void init(AttributeSet attrs) {
         inflate(getContext(), R.layout.view_styled_text, this);
         view = findViewById(R.id.text);
-        // Font.init(getContext());
-
         reset();
 
         if (attrs != null) {

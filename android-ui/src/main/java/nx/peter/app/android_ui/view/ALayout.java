@@ -4,13 +4,13 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-abstract class AbstractLayout<A extends AbstractLayout, V extends View> extends AbstractView<A> implements ILayout<A, V> {
+abstract class ALayout<A extends ALayout, V extends View> extends AView<A> implements ILayout<A, V> {
 
-  public AbstractLayout(Context c) {
+  public ALayout(Context c) {
     super(c);
   }
   
-  public AbstractLayout(Context c, AttributeSet attrs) {
+  public ALayout(Context c, AttributeSet attrs) {
       super(c, attrs);
   }
   

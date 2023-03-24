@@ -9,8 +9,9 @@
     <nx.peter.app.android_ui.view.StyledText
             android:id="@+id/line_number"
             app:view_background="black"
-            android:paddingHorizontal="0dp"
+            android:padding="0dp"
             android:text="01"
+            app:alignment="top_left"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
@@ -24,11 +25,14 @@
 
     <ScrollView
             android:background="@color/black"
+            android:padding="0dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
+
         <HorizontalScrollView
                 android:fillViewport="true"
+                android:padding="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -36,7 +40,7 @@
                     android:id="@+id/editor"
                     app:view_background="black"
                     android:textColor="@color/white"
-                    android:paddingHorizontal="0dp"
+                    android:padding="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
         </HorizontalScrollView>

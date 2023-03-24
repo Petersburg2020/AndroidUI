@@ -135,6 +135,10 @@ public interface ChartView<V extends View, D extends ChartView.Data, L extends C
             return l;
         }
 
+        protected void toColor() {
+
+        }
+
         public abstract List<N> getEntries();
 
         @NonNull
@@ -146,7 +150,7 @@ public interface ChartView<V extends View, D extends ChartView.Data, L extends C
 
     abstract class Builder<
             B extends Builder, C extends Chart, S extends DataSet, I extends Data, E extends DataList>
-            extends AbstractView<B> implements ChartView<B, I, E> {
+            extends AView<B> implements ChartView<B, I, E> {
         // protected Statistics stat;
         protected ColorSwatch color;
         protected List<I> data;

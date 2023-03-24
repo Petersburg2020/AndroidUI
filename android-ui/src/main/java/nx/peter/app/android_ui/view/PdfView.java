@@ -20,7 +20,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PdfView extends AbstractView<PdfView> {
+public class PdfView extends AView<PdfView> {
     protected ImageView view;
     protected PdfFile pdfFile;
 
@@ -35,6 +35,8 @@ public class PdfView extends AbstractView<PdfView> {
     @Override
     protected void init(AttributeSet attrs) {
         inflate(getContext(), R.layout.view_pdf, this);
+
+
 
     }
 

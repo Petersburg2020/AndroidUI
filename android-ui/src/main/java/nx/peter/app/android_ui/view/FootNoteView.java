@@ -14,7 +14,7 @@ import nx.peter.app.android_ui.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FootNoteView extends AbstractView<FootNoteView> {
+public class FootNoteView extends AView<FootNoteView> {
     protected List<SocialMedia> media;
     protected Background background;
     protected RecyclerView socials;

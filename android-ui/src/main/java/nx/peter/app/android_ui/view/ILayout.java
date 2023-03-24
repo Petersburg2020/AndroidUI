@@ -12,7 +12,7 @@ public interface ILayout<I extends View, V extends View> extends IView<I> {
 	V getChildAt(int index);
 	LayoutDetails getLayoutParams();
 	
-	class LayoutDetails extends AbstractView.LayoutParams {
+	class LayoutDetails extends AView.LayoutParams {
 		public LayoutDetails(int width, int height) {
 			super(width, height);
 		}

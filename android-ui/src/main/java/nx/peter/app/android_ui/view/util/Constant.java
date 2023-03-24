@@ -14,7 +14,7 @@ public class Constant {
     @ColorInt
     public static final int PURPLE = Color.parseColor("#FF7500FF");
     @ColorInt
-    public static final int BLUE_LIGHT = Color.parseColor("#FF3775FF");
+    public static final int BLUE_LIGHT = Color.parseColor("#FF75AAFF");
     @ColorInt
     public static final int PURPLE_LIGHT = Color.parseColor("#FF6C3F9F");
     @ColorInt

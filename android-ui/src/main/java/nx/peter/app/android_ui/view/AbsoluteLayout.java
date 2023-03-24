@@ -1,4 +1,4 @@
-package nx.peter.app.android_ui.view.drag;
+package nx.peter.app.android_ui.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -37,6 +37,21 @@ public class AbsoluteLayout extends ViewGroup {
         super(context, attrs, defStyleAttr);
     }
 
+    protected void init(AttributeSet attrs) {
+        if (attrs != null) {
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.AbsoluteLayout);
+
+            try {
+                int x = a.getInt(R.styleable.AbsoluteLayout_x, 0);
+                setX(x);
+            } catch (Exception ignored) {}
+
+            a.recycle();
+            a.close();
+        }
+
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int count = getChildCount();
@@ -68,6 +83,7 @@ public class AbsoluteLayout extends ViewGroup {
         // Account for padding too
         maxWidth += getPaddingLeft() + getPaddingRight();
         maxHeight += getPaddingTop() + getPaddingBottom();
+
         /* original
         maxWidth += mPaddingLeft + mPaddingRight;
         maxHeight += mPaddingTop + mPaddingBottom;
@@ -188,7 +204,7 @@ public class AbsoluteLayout extends ViewGroup {
             x = a.getDimensionPixelOffset(R.styleable.AbsoluteLayout_x, 0);
             y = a.getDimensionPixelOffset(R.styleable.AbsoluteLayout_y, 0);
             a.recycle();
-
+            a.close();
         }
 
         /**

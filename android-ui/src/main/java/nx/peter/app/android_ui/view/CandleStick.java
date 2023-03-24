@@ -1,4 +1,4 @@
-package nx.peter.app.android_ui.view.chart;
+package nx.peter.app.android_ui.view;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -9,7 +9,6 @@ import com.github.mikephil.charting.data.CandleData;
 import com.github.mikephil.charting.data.CandleDataSet;
 import com.github.mikephil.charting.data.CandleEntry;
 import nx.peter.app.android_ui.R;
-import nx.peter.app.android_ui.view.ChartView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,7 @@ public class CandleStick extends ChartView.Builder<CandleStick, CandleStickChart
     @Override
     protected void reset() {
         super.reset();
+
     }
 
     @Override

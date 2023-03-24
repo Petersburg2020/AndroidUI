@@ -21,8 +21,12 @@ public interface ITable<T extends View> extends IView<T> {
         Px
     }
 
-    interface Cell {
+    interface Cell<V extends View> extends StyledView<V> {
+        int getColumn();
 
+        int getRow();
+
+        ITable<?> getTable();
     }
 
     interface OnCellClickedListener {

@@ -19,7 +19,7 @@ import nx.peter.app.android_ui.view.text.*;
 import java.util.Arrays;
 import java.util.List;
 
-abstract class AStyledScrollableView<I extends AStyledScrollableView, T extends AStyledView> extends AbstractView<I> implements StyledView<I> {
+abstract class AStyledScrollableView<I extends AStyledScrollableView, T extends AStyledView> extends AView<I> implements StyledView<I> {
     protected T hView, vView, vhView;
     protected OnTextChangedListener<I> listener;
     protected OnPropertyChangedListener<I> propertyChangedListener;

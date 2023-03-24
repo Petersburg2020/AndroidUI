@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import nx.peter.app.android_ui.R;
 
-public class WindowLayout extends AbstractView<WindowLayout> {
+public class WindowLayout extends AView<WindowLayout> {
     protected LinearLayout toolBar;
     protected RecyclerView launchedApps;
 

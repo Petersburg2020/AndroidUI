@@ -16,7 +16,7 @@ import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 import nx.peter.app.android_ui.R;
 
-public class TreeView extends AbstractView<TreeView> {
+public class TreeView extends AView<TreeView> {
     protected AndroidTreeView view;
     protected LinearLayout layout;
     protected ArrowHolder holder;
@@ -40,7 +40,7 @@ public class TreeView extends AbstractView<TreeView> {
     protected void reset() {
         holder = new ArrowHolder(this); //, new IconItem(getContext(), R.drawable.github, "Main Text", "Description goes here..."));
         view.setDefaultAnimation(true);
-        // view.setDefaultViewHolder(ArrowHolder.class);
+        view.setDefaultViewHolder(ArrowHolder.class);
         view.setDefaultAnimation(true);
         view.setRoot(new TreeNode(new IconItem(getContext(), R.drawable.github, "Main Text", "Description goes here...")));
 

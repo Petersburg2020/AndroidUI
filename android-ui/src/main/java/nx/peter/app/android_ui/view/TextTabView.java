@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TextTabView extends AbstractView<TextTabView> {
+public class TextTabView extends AView<TextTabView> {
 	protected StyledText layout;
 	protected OnTabClickListener listener;
 	protected Adapter.OnDataChangedListener dListener;

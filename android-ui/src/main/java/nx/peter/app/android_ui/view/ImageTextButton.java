@@ -20,7 +20,7 @@ import nx.peter.app.android_ui.view.util.Size;
 
 import java.util.List;
 
-public class ImageTextButton extends AbstractView<ImageTextButton> implements StyledView<ImageTextButton> {
+public class ImageTextButton extends AView<ImageTextButton> implements StyledView<ImageTextButton> {
     private ImageView imageView;
     private StyledText view;
     private LinearLayout layout;
@@ -108,9 +108,9 @@ public class ImageTextButton extends AbstractView<ImageTextButton> implements St
                 if (getImageHeight() <= 0)
                     setImageHeight(height);
             } catch (Exception ignored) {
-            } finally {
-                a.recycle();
             }
+
+            a.recycle();
         }
 
         reset();
