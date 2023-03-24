@@ -1,6 +1,7 @@
 package nx.peter.app.android_ui.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import com.github.mikephil.charting.charts.BarChart;
@@ -35,12 +36,6 @@ public class BarChartView
     protected void reset() {
         super.reset();
 
-        setTitle("Shapes");
-        setColorSwatch(ColorSwatch.Material);
-        addData("Square", 0.7f, 1.5f);
-        addData("Circle", 0.8f, 2.5f);
-        addData("Rectangle", 0.6f, 1.8f);
-
         // chart.animateXY(0,0, Easing.EaseInBounce);
     }
 
@@ -62,8 +57,18 @@ public class BarChartView
     @Override
     protected void setup() {
         dataSet = new BarDataSet(getData().getEntries(), getTitle());
-        chart.setData(new BarData(dataSet));
+        BarData data = new BarData(dataSet);
+        data.setBarWidth(20f);
+        data.setDrawValues(true);
+
+        chart.setData(data);
         dataSet.setColors(getColor(color));
+        dataSet.setBarBorderWidth(2);
+        dataSet.setValueTextSize(16f);
+        dataSet.setValueTextColor(Color.BLACK);
+
+
+        chart.getDescription().setEnabled(false);
         chart.animateXY(animateX, animateY, getEase(animator));
     }
 

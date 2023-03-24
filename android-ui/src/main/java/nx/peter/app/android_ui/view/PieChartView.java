@@ -36,11 +36,6 @@ public class PieChartView
     protected void reset() {
         super.reset();
 
-        setTitle("Shapes");
-        setColorSwatch(ColorSwatch.Vordiplom);
-        addData("Square", 45);
-        addData("Circle", 25);
-        addData("Rectangle", 78);
     }
 
     @Override
@@ -120,7 +115,8 @@ public class PieChartView
         @Override
         public List<PieEntry> getEntries() {
             List<PieEntry> p = new ArrayList<>();
-            for (PiData d : data) p.add(new PieEntry(d.getValue1(), d.getLabel()));
+            for (PiData d : data)
+                p.add(new PieEntry(d.getValue1(), d.getLabel()));
             return p;
         }
     }
