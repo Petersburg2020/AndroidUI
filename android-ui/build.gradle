@@ -54,9 +54,10 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
+
                 groupId = 'com.github.Petersburg2020' as Publication
-                artifactId = 'android-ui' as Publication
-                version = '1.0.0' as Publication
+                artifactId = 'androidui' as Publication
+                version = '1.0.3' as Publication
 
                 afterEvaluate {
                     from components.release
