@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import nx.peter.app.android_ui.R;
 import nx.peter.app.android_ui.view.text.Font;
+import nx.peter.app.android_ui.view.util.Dimens;
 
 public class StyledScrollableText extends AStyledScrollableView<StyledScrollableText, StyledText> {
 
@@ -38,11 +39,9 @@ public class StyledScrollableText extends AStyledScrollableView<StyledScrollable
         if (attrs != null) {
             TypedArray a = obtainStyledAttributes(attrs, R.styleable.StyledScrollableText);
 
-            float screenDensity = Resources.getSystem().getDisplayMetrics().density;
-
             try {
-                float size = a.getDimension(R.styleable.StyledScrollableText_android_textSize, getContext().getResources().getDimension(R.dimen.text_size));
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, size / screenDensity);
+                float size = a.getDimension(R.styleable.StyledScrollableText_android_textSize, (int) Dimens.toSp(16));
+                setTextSize(size / getDisplayMetrics().scaledDensity);
             } catch (Exception ignored) {
             }
 
@@ -73,34 +72,7 @@ public class StyledScrollableText extends AStyledScrollableView<StyledScrollable
 
             try {
                 int alignment = a.getInt(R.styleable.StyledScrollableText_alignment, -1);
-                switch (alignment) {
-                    case 0:
-                        setAlignment(Alignment.Center);
-                        break;
-                    case 1:
-                        setAlignment(Alignment.TopRight);
-                        break;
-                    case 2:
-                        setAlignment(Alignment.TopLeft);
-                        break;
-                    case 3:
-                        setAlignment(Alignment.BottomRight);
-                        break;
-                    case 4:
-                        setAlignment(Alignment.BottomLeft);
-                        break;
-                    case 5:
-                        setAlignment(Alignment.CenterLeft);
-                        break;
-                    case 6:
-                        setAlignment(Alignment.CenterRight);
-                        break;
-                    case 7:
-                        setAlignment(Alignment.TopCenter);
-                        break;
-                    case 8:
-                        setAlignment(Alignment.BottomCenter);
-                }
+                setAlignment(alignment);
             } catch (Exception ignored) {
             }
 
@@ -112,148 +84,37 @@ public class StyledScrollableText extends AStyledScrollableView<StyledScrollable
 
             try {
                 int color = a.getInt(R.styleable.StyledScrollableText_textColor, -1);
-                switch (color) {
-                    case 0:
-                        setTextColor(Color.BLACK);
-                        break;
-                    case 1:
-                        setTextColor(Color.GRAY);
-                        break;
-                    case 2:
-                        setTextColor(Color.WHITE);
-                        break;
-                    case 3:
-                        setTextColor(Color.RED);
-                        break;
-                    case 4:
-                        setTextColor(Color.BLUE);
-                        break;
-                    case 5:
-                        setTextColor(Color.GREEN);
-                        break;
-                    case 6:
-                        setTextColor(Color.YELLOW);
-                        break;
-                    case 7:
-                        setTextColor(Color.parseColor("#FFFF7500"));
-                        break;
-                    case 8:
-                        setTextColor(Color.parseColor("#FF7500FF"));
-                        break;
-                    case 9:
-                        setTextColor(Color.parseColor("#FFFF00D8"));
-                        break;
-                    case 10:
-                        setTextColor(Color.parseColor("#FF603608"));
-                        break;
-                    case 11:
-                        setTextColor(Color.CYAN);
-                        break;
-                    case 12:
-                        setTextColor(Color.parseColor("#FF00FFFF"));
-                }
+                setForegroundColor(color);
             } catch (Exception ignored) {
             }
 
             try {
                 int font = a.getInt(R.styleable.StyledScrollableText_font_family, 0);
-                switch (font) {
-                    case 0:
-                        setFont(getFont().set(Typeface.create("sans-serif", Typeface.NORMAL)));
-                        break;
-                    case 1:
-                        setFont(getFont().set(Typeface.create("serif", Typeface.NORMAL)));
-                        break;
-                    case 3:
-                        setFont(getFont().set(Typeface.create("casual", Typeface.NORMAL)));
-                        break;
-                    case 2:
-                        setFont(getFont().set(Typeface.create("cursive", Typeface.NORMAL)));
-                        break;
-                    case 4:
-                        setFont(getFont().set(Typeface.create("monospace", Typeface.NORMAL)));
-                }
+                setFontFamily(font);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int font = a.getInt(R.styleable.StyledScrollableText_view_font, -1);
+                setFont(font);
             } catch (Exception ignored) {
             }
 
             try {
                 int style = a.getInt(R.styleable.StyledScrollableText_view_font_style, -1);
-                switch (style) {
-                    case 0:
-                        setFontStyle(Font.Style.Bold);
-                        break;
-                    case 1:
-                        setFontStyle(Font.Style.Italic);
-                        break;
-                    case 2:
-                        setFontStyle(Font.Style.Regular);
-                        break;
-                    case 3:
-                        setFontStyle(Font.Style.BoldItalic);
-                }
+                setStyle(style);
             } catch (Exception ignored) {
             }
 
             try {
                 int background = a.getInt(R.styleable.StyledScrollableText_view_background, 11);
-                switch (background) {
-                    case 0:
-                        setBackground(Background.Black);
-                        break;
-                    case 1:
-                        setBackground(Background.Grey);
-                        break;
-                    case 2:
-                        setBackground(Background.White);
-                        break;
-                    case 3:
-                        setBackground(Background.Red);
-                        break;
-                    case 4:
-                        setBackground(Background.Blue);
-                        break;
-                    case 5:
-                        setBackground(Background.Green);
-                        break;
-                    case 6:
-                        setBackground(Background.Yellow);
-                        break;
-                    case 7:
-                        setBackground(Background.Orange);
-                        break;
-                    case 8:
-                        setBackground(Background.Purple);
-                        break;
-                    case 9:
-                        setBackground(Background.Pink);
-                        break;
-                    case 10:
-                        setBackground(Background.Brown);
-                        break;
-                    case 11:
-                        setBackground(Background.Transparent);
-                        break;
-                    case 12:
-                        setBackground(Background.Cyan);
-                        break;
-                    case 13:
-                        setBackground(Background.Lime);
-                }
+                setBackground(background);
             } catch (Exception ignored) {
             }
 
             try {
                 int direction = a.getInt(R.styleable.StyledScrollableText_scroll_direction, 0);
-                switch (direction) {
-                    case 0:
-                        setScrollDirection(Direction.Vertical);
-                        break;
-                    case 1:
-                        setScrollDirection(Direction.Horizontal);
-                        break;
-                    case 2:
-                        setScrollDirection(Direction.Both);
-                }
+                setScrollDirection(direction);
             } catch (Exception ignored) {
             }
 

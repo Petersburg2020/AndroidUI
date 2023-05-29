@@ -5,16 +5,9 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <nx.peter.app.android_ui.view.StyledScrollableText
-            android:id="@+id/pdf_view"
-            app:view_background="orange"
-            app:view_padding="10dp"
-            app:textColor="white"
-            app:alignment="top_left"
-            app:font_family="monospace"
-            app:view_font_style="bold"
+    <nx.peter.app.android_ui.view.Content
+            android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
 
 </LinearLayout>

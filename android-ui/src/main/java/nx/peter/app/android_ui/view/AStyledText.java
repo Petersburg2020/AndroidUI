@@ -3,11 +3,11 @@ package nx.peter.app.android_ui.view;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.widget.TextView;
+import com.google.android.material.textview.MaterialTextView;
 import nx.peter.app.android_ui.R;
 import nx.peter.app.android_ui.view.text.Font;
 
-abstract class AStyledText<I extends AStyledText> extends AStyledView<I, TextView> {
+abstract class AStyledText<I extends AStyledText> extends AStyledView<I, MaterialTextView> {
 
     public AStyledText(Context context) {
         super(context);
@@ -29,4 +29,6 @@ abstract class AStyledText<I extends AStyledText> extends AStyledView<I, TextVie
         addUnderlines("underline");
         addSubColors(Color.GREEN, "color");
     }
+
+
 }

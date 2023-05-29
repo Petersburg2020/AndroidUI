@@ -23,7 +23,7 @@ public interface PdfFile {
 
         String getCreator();
 
-        String getCreatedDate();
+        long getCreatedDate();
 
         boolean equals(@NonNull Meta another);
     }

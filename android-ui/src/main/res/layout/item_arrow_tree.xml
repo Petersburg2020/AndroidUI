@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-        <nx.peter.app.android_ui.view.ScrollingTextView
+        <nx.peter.app.android_ui.view.ScrollingText
                 android:id="@+id/detail"
                 android:textColor="@color/black"
                 android:text="@string/tree_view_item"

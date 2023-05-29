@@ -1,49 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="horizontal"
         android:padding="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <nx.peter.app.android_ui.view.StyledText
-            android:id="@+id/line_number"
-            app:view_background="black"
-            android:padding="0dp"
-            android:text="01"
-            app:alignment="top_left"
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
-
-    <LinearLayout
-            android:id="@+id/divider"
-            android:background="@color/white"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"/>
-
     <ScrollView
-            android:background="@color/black"
             android:padding="0dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            tools:ignore="UselessParent">
 
-        <HorizontalScrollView
-                android:fillViewport="true"
-                android:padding="0dp"
+        <LinearLayout
+                android:id="@+id/screen"
+                android:background="@color/black"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                tools:ignore="ScrollViewSize">
 
-            <nx.peter.app.android_ui.view.StyledEditor
-                    android:id="@+id/editor"
+            <nx.peter.app.android_ui.view.StyledText
+                    android:id="@+id/line_number"
                     app:view_background="black"
+                    android:text="01"
+                    app:alignment="top_right"
+                    app:view_padding_vertical="10dp"
                     android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    tools:ignore="HardcodedText"/>
+
+            <LinearLayout
+                    android:id="@+id/divider"
+                    android:background="@color/white"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"/>
+
+            <HorizontalScrollView
+                    android:fillViewport="true"
                     android:padding="0dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-        </HorizontalScrollView>
+                    android:layout_height="match_parent">
+
+                <LinearLayout
+                        android:id="@+id/edit_wrapper"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <nx.peter.app.android_ui.view.StyledEditor
+                            android:id="@+id/editor"
+                            android:text="Line 1"
+                            app:view_background="black"
+                            android:textColor="@color/white"
+                            app:view_padding="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:ignore="HardcodedText"/>
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+        </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

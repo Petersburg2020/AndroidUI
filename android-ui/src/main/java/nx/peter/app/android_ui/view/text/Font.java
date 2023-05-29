@@ -23,8 +23,8 @@ public class Font {
             RUSTHINA,
             ROWDIES_REGULAR,
             PAJAMA_PANTS_LIGHT,
-            BEFORE_THE_RAIN,
-            BEFORE_THE_RAIN_SWATCHES,
+            TRESDIAS,
+            THE_ARTISAN_MARKER_SERIF,
             CANTERBURY,
             PAJAMA_PANTS_BOLD,
             PAJAMA_PANTS,
@@ -34,6 +34,7 @@ public class Font {
             JOSEFIN_SANS_EXTRA_BOLD,
             JOSEFIN_SANS_SEMI_BOLD,
             JOSEFIN_SANS_BOLD_ITALIC,
+            JOSEFIN_SANS_ITALIC,
             JOSEFIN_SANS_LIGHT_ITALIC,
             JOSEFIN_SANS_EXTRA_BOLD_ITALIC,
             JOSEFIN_SANS_SEMI_BOLD_ITALIC,
@@ -60,8 +61,8 @@ public class Font {
 
 
             PAJAMA_PANTS_LIGHT = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/PajamaPantsLight.ttf"));
-            BEFORE_THE_RAIN = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/Tresdias.otf"));
-            BEFORE_THE_RAIN_SWATCHES = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/TheArtisanMarkerSerif.otf"));
+            TRESDIAS = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/Tresdias.otf"));
+            THE_ARTISAN_MARKER_SERIF = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/TheArtisanMarkerSerif.otf"));
             CANTERBURY = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/Canterbury.otf"));
             PAJAMA_PANTS = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/PajamaPants.ttf"));
             PAJAMA_PANTS_BOLD = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/PajamaPantsBold.ttf"));
@@ -72,8 +73,9 @@ public class Font {
             JOSEFIN_SANS_SEMI_BOLD_ITALIC = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/JosefinSans-SemiBoldItalic.ttf"));
             JOSEFIN_SANS_EXTRA_BOLD = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/JosefinSans-ExtraBold.ttf"));
             JOSEFIN_SANS_EXTRA_BOLD_ITALIC = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/JosefinSans-ExtraBoldItalic.ttf"));
+            JOSEFIN_SANS_ITALIC = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/JosefinSans-Italic.ttf"));
             JOSEFIN_SANS_LIGHT = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/JosefinSans-Light.ttf"));
-            JOSEFIN_SANS_LIGHT = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/JosefinSans-LightItalic.ttf"));
+            JOSEFIN_SANS_LIGHT_ITALIC = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/JosefinSans-LightItalic.ttf"));
             JOSEFIN_SANS_REGULAR = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/JosefinSans-Regular.ttf"));
 
             RUSTHINA = new Font(context, Typeface.createFromAsset(context.getAssets(), "font/Rusthina.otf"));

@@ -568,6 +568,9 @@ public interface StyledView<V extends View> extends IView<V> {
      * editing texts.
      */
     abstract class Tokenizer implements MultiAutoCompleteTextView.Tokenizer {
+        public static final String CODING = " .,{[()]}:;><|/\\";
+
+
         protected String tokens;
 
         public Tokenizer(@NonNull String tokens) {

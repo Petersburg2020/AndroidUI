@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public interface ChartView<V extends View, D extends ChartView.Data, L extends ChartView.DataList>
-        extends IView<V> {
+public interface ChartView<V extends View, D extends ChartView.Data, L extends ChartView.DataList> extends IView<V> {
     Type getType();
 
     L getData();
@@ -65,38 +64,24 @@ public interface ChartView<V extends View, D extends ChartView.Data, L extends C
     void setAnimator(Animator animator);
 
     enum Type {
-        PieChart,
-        BarChart,
-        CandleStick
+        PieChart, BarChart, CandleStick
     }
 
     enum Animator {
-        EaseInBounce,
-        EaseOutBounce,
-        EaseInCircle,
-        EaseOutCircle,
-        EaseInCubic,
-        EaseOutCubic,
-        EaseInElastic,
-        EaseOutElastic,
-        EaseInQuad,
-        EaseOutQuad,
-        Linear
+        EaseInBounce, EaseOutBounce, EaseInCircle, EaseOutCircle, EaseInCubic, EaseOutCubic, EaseInElastic, EaseOutElastic, EaseInQuad, EaseOutQuad, Linear
     }
 
     enum ColorSwatch {
-        Colorful,
-        Joyful,
-        Liberty,
-        Material,
-        Pastel,
-        Vordiplom
+        Colorful, Joyful, Liberty, Material, Pastel, Vordiplom
     }
 
     interface Data<T extends Data> {
         float getValue1();
+
         float getValue2();
+
         String getLabel();
+
         T get();
     }
 
@@ -148,9 +133,7 @@ public interface ChartView<V extends View, D extends ChartView.Data, L extends C
         }
     }
 
-    abstract class Builder<
-            B extends Builder, C extends Chart, S extends DataSet, I extends Data, E extends DataList>
-            extends AView<B> implements ChartView<B, I, E> {
+    abstract class Builder<B extends Builder, C extends Chart, S extends DataSet, I extends Data, E extends DataList> extends AView<B> implements ChartView<B, I, E> {
         // protected Statistics stat;
         protected ColorSwatch color;
         protected List<I> data;
@@ -204,6 +187,7 @@ public interface ChartView<V extends View, D extends ChartView.Data, L extends C
             this.animator = animator;
             setup();
         }
+
         @Override
         public Animator getAnimator() {
             return animator;
@@ -227,19 +211,45 @@ public interface ChartView<V extends View, D extends ChartView.Data, L extends C
         @Override
         public void setForeground(@NonNull Foreground foreground) {
             switch (foreground) {
-                case Blue: setValueColor(Color.BLUE); break;
-                case Black: setValueColor(Color.BLACK); break;
-                case Brown: setValueColor(Color.parseColor("#FF603608")); break;
-                case Cyan: setValueColor(Color.CYAN); break;
-                case Green: setValueColor(Color.GREEN); break;
-                case Grey: setValueColor(Color.GRAY); break;
-                case Lime: setValueColor(Color.parseColor("#FF84FF00")); break;
-                case Pink: setValueColor(Color.parseColor("#FFFF00D8")); break;
-                case Orange: setValueColor(Color.parseColor("#FFFF7500")); break;
-                case Purple: setValueColor(Color.parseColor("#FF7500FF")); break;
-                case Red: setValueColor(Color.RED); break;
-                case White: setValueColor(Color.WHITE); break;
-                case Yellow: setValueColor(Color.YELLOW); break;
+                case Blue:
+                    setValueColor(Color.BLUE);
+                    break;
+                case Black:
+                    setValueColor(Color.BLACK);
+                    break;
+                case Brown:
+                    setValueColor(Color.parseColor("#FF603608"));
+                    break;
+                case Cyan:
+                    setValueColor(Color.CYAN);
+                    break;
+                case Green:
+                    setValueColor(Color.GREEN);
+                    break;
+                case Grey:
+                    setValueColor(Color.GRAY);
+                    break;
+                case Lime:
+                    setValueColor(Color.parseColor("#FF84FF00"));
+                    break;
+                case Pink:
+                    setValueColor(Color.parseColor("#FFFF00D8"));
+                    break;
+                case Orange:
+                    setValueColor(Color.parseColor("#FFFF7500"));
+                    break;
+                case Purple:
+                    setValueColor(Color.parseColor("#FF7500FF"));
+                    break;
+                case Red:
+                    setValueColor(Color.RED);
+                    break;
+                case White:
+                    setValueColor(Color.WHITE);
+                    break;
+                case Yellow:
+                    setValueColor(Color.YELLOW);
+                    break;
             }
         }
 
@@ -250,17 +260,28 @@ public interface ChartView<V extends View, D extends ChartView.Data, L extends C
 
         protected Easing.EasingFunction getEase(Animator animator) {
             switch (animator) {
-                case EaseInBounce: return Easing.EaseInBounce;
-                case EaseOutBounce: return Easing.EaseOutBounce;
-                case EaseInCircle: return Easing.EaseInCirc;
-                case EaseOutCircle: return Easing.EaseOutCirc;
-                case EaseInCubic: return Easing.EaseInCubic;
-                case EaseOutCubic: return Easing.EaseOutCubic;
-                case EaseInElastic: return Easing.EaseInElastic;
-                case EaseOutElastic: return Easing.EaseOutElastic;
-                case EaseInQuad: return Easing.EaseInQuad;
-                case EaseOutQuad: return Easing.EaseOutQuad;
-                default: return Easing.Linear;
+                case EaseInBounce:
+                    return Easing.EaseInBounce;
+                case EaseOutBounce:
+                    return Easing.EaseOutBounce;
+                case EaseInCircle:
+                    return Easing.EaseInCirc;
+                case EaseOutCircle:
+                    return Easing.EaseOutCirc;
+                case EaseInCubic:
+                    return Easing.EaseInCubic;
+                case EaseOutCubic:
+                    return Easing.EaseOutCubic;
+                case EaseInElastic:
+                    return Easing.EaseInElastic;
+                case EaseOutElastic:
+                    return Easing.EaseOutElastic;
+                case EaseInQuad:
+                    return Easing.EaseInQuad;
+                case EaseOutQuad:
+                    return Easing.EaseOutQuad;
+                default:
+                    return Easing.Linear;
             }
         }
 

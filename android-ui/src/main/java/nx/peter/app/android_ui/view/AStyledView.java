@@ -2,6 +2,8 @@ package nx.peter.app.android_ui.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.SpannableString;
@@ -20,13 +22,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-abstract class AStyledView<I extends AStyledView, T extends TextView> extends AView<I> implements StyledView<I> {
+abstract class AStyledView<A extends AStyledView, T extends TextView> extends AView<A> implements StyledView<A> {
     protected T view;
     protected SpannableString span;
     protected String text;
     protected boolean linksClickable, scrollable, singleLine;
-    protected OnTextChangedListener<I> listener;
-    protected OnPropertyChangedListener<I> propertyChangedListener;
+    protected OnTextChangedListener<A> listener;
+    protected OnPropertyChangedListener<A> propertyChangedListener;
     protected int horizontal, vertical;
     protected Ellipsize ellipsize;
     protected List<Text> subTexts;
@@ -65,6 +67,142 @@ abstract class AStyledView<I extends AStyledView, T extends TextView> extends AV
 
         setPadding(0);
     }
+
+    protected void setStyle(int style) {
+        switch (style) {
+            case 0:
+                setFontStyle(Font.Style.Bold);
+                break;
+            case 1:
+                setFontStyle(Font.Style.Italic);
+                break;
+            case 2:
+                setFontStyle(Font.Style.Regular);
+                break;
+            case 3:
+                setFontStyle(Font.Style.BoldItalic);
+        }
+    }
+
+    protected void setFont(int index) {
+        switch (index) {
+            case 0: setFont(Font.CANTERBURY); break;
+            case 1: setFont(Font.JOSEFIN_SANS_BOLD); break;
+            case 2: setFont(Font.JOSEFIN_SANS_BOLD_ITALIC); break;
+            case 3: setFont(Font.JOSEFIN_SANS_EXTRA_BOLD); break;
+            case 4: setFont(Font.JOSEFIN_SANS_EXTRA_BOLD_ITALIC); break;
+            case 5: setFont(Font.JOSEFIN_SANS_ITALIC); break;
+            case 6: setFont(Font.JOSEFIN_SANS_LIGHT); break;
+            case 7: setFont(Font.JOSEFIN_SANS_LIGHT_ITALIC); break;
+            case 8: setFont(Font.JOSEFIN_SANS_REGULAR); break;
+            case 9: setFont(Font.JOSEFIN_SANS_SEMI_BOLD); break;
+            case 10: setFont(Font.JOSEFIN_SANS_SEMI_BOLD_ITALIC); break;
+            case 11: setFont(Font.PAJAMA_PANTS); break;
+            case 12: setFont(Font.PAJAMA_PANTS_BOLD); break;
+            case 13: setFont(Font.PAJAMA_PANTS_LIGHT); break;
+            case 14: setFont(Font.ROWDIES_BOLD); break;
+            case 15: setFont(Font.ROWDIES_REGULAR); break;
+            case 16: setFont(Font.RUSTHINA); break;
+            case 17: setFont(Font.THE_ARTISAN_MARKER_SERIF); break;
+            case 18: setFont(Font.TRESDIAS);
+        }
+    }
+
+    protected void setFontFamily(int font) {
+        switch (font) {
+            case 0:
+                setFont(getFont().set(Typeface.create("sans-serif", Typeface.NORMAL)));
+                break;
+            case 1:
+                setFont(getFont().set(Typeface.create("serif", Typeface.NORMAL)));
+                break;
+            case 3:
+                setFont(getFont().set(Typeface.create("casual", Typeface.NORMAL)));
+                break;
+            case 2:
+                setFont(getFont().set(Typeface.create("cursive", Typeface.NORMAL)));
+                break;
+            case 4:
+                setFont(getFont().set(Typeface.create("monospace", Typeface.NORMAL)));
+        }
+    }
+
+    protected void setAlignment(int alignment) {
+        switch (alignment) {
+            case 0:
+                setAlignment(Alignment.Center);
+                break;
+            case 1:
+                setAlignment(Alignment.TopRight);
+                break;
+            case 2:
+                setAlignment(Alignment.TopLeft);
+                break;
+            case 3:
+                setAlignment(Alignment.BottomRight);
+                break;
+            case 4:
+                setAlignment(Alignment.BottomLeft);
+                break;
+            case 5:
+                setAlignment(Alignment.CenterLeft);
+                break;
+            case 6:
+                setAlignment(Alignment.CenterRight);
+                break;
+            case 7:
+                setAlignment(Alignment.TopCenter);
+                break;
+            case 8:
+                setAlignment(Alignment.BottomCenter);
+        }
+    }
+
+    protected void setForegroundColor(int color) {
+        switch (color) {
+            case 0:
+                setTextColor(Color.BLACK);
+                break;
+            case 1:
+                setTextColor(Color.GRAY);
+                break;
+            case 2:
+                setTextColor(Color.WHITE);
+                break;
+            case 3:
+                setTextColor(Color.RED);
+                break;
+            case 4:
+                setTextColor(Color.BLUE);
+                break;
+            case 5:
+                setTextColor(Color.GREEN);
+                break;
+            case 6:
+                setTextColor(Color.YELLOW);
+                break;
+            case 7:
+                setTextColor(Color.parseColor("#FFFF7500"));
+                break;
+            case 8:
+                setTextColor(Color.parseColor("#FF7500FF"));
+                break;
+            case 9:
+                setTextColor(Color.parseColor("#FFFF00D8"));
+                break;
+            case 10:
+                setTextColor(Color.parseColor("#FF603608"));
+                break;
+            case 11:
+                setTextColor(Color.CYAN);
+                break;
+            case 12:
+                setTextColor(Color.parseColor("#FF00FFFF"));
+        }
+    }
+
+
+
 
     public void setHint(@NonNull CharSequence hint) {
         view.setHint(hint);
@@ -446,8 +584,8 @@ abstract class AStyledView<I extends AStyledView, T extends TextView> extends AV
 
 
     @Override
-    public void setOnTextChangedListener(final OnTextChangedListener<I> listener) {
-        OnTextChangedListener<I> oldData = getOnTextChangedListener();
+    public void setOnTextChangedListener(final OnTextChangedListener<A> listener) {
+        OnTextChangedListener<A> oldData = getOnTextChangedListener();
         this.listener = listener;
 
         view.addTextChangedListener(new TextChangeListener<>(this, /*oldText,*/ listener));
@@ -457,8 +595,8 @@ abstract class AStyledView<I extends AStyledView, T extends TextView> extends AV
     }
 
     @Override
-    public void setOnPropertyChangedListener(OnPropertyChangedListener<I> listener) {
-        OnPropertyChangedListener<I> oldData = getOnPropertyChangedListener();
+    public void setOnPropertyChangedListener(OnPropertyChangedListener<A> listener) {
+        OnPropertyChangedListener<A> oldData = getOnPropertyChangedListener();
         propertyChangedListener = listener;
 
         if (propertyChangedListener != null)
@@ -467,12 +605,12 @@ abstract class AStyledView<I extends AStyledView, T extends TextView> extends AV
 
 
     @Override
-    public OnTextChangedListener<I> getOnTextChangedListener() {
+    public OnTextChangedListener<A> getOnTextChangedListener() {
         return listener;
     }
 
     @Override
-    public OnPropertyChangedListener<I> getOnPropertyChangedListener() {
+    public OnPropertyChangedListener<A> getOnPropertyChangedListener() {
         return propertyChangedListener;
     }
 
@@ -641,7 +779,7 @@ abstract class AStyledView<I extends AStyledView, T extends TextView> extends AV
         return view.getTextSize();
     }
 
-    public void addLinks(OnLinkClickListener<I> link, CharSequence... subs) {
+    public void addLinks(OnLinkClickListener<A> link, CharSequence... subs) {
         addSubTexts(SpannableTextFormat.getLinkSpan(span, text, link, subs).texts);
     }
 

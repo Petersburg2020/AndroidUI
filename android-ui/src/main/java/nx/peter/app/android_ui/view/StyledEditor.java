@@ -6,7 +6,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import nx.peter.app.android_ui.R;
-import nx.peter.app.android_ui.view.text.Font;
+import nx.peter.app.android_ui.view.util.Dimens;
 
 public class StyledEditor extends AStyledEditor<StyledEditor> {
 
@@ -27,28 +27,29 @@ public class StyledEditor extends AStyledEditor<StyledEditor> {
         if (attrs != null) {
             TypedArray a = obtainStyledAttributes(attrs, R.styleable.StyledEditor);
 
-            float screenDensity  = Resources.getSystem().getDisplayMetrics().density;
-
             try {
-                float size = a.getDimension(R.styleable.StyledEditor_android_textSize, Resources.getSystem().getDimension(R.dimen.text_size));
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, size/screenDensity);
+                float size = a.getDimension(R.styleable.StyledEditor_android_textSize, (int) Dimens.toSp(16));
+                setTextSize(size / getDisplayMetrics().scaledDensity);
             } catch (Exception ignored) {
             }
 
             try {
                 float scale = a.getFloat(R.styleable.StyledEditor_scale, 1);
                 setScale(scale);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
 
             try {
                 float scale = a.getFloat(R.styleable.StyledEditor_scale_x, 1);
                 setScaleX(scale);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
 
             try {
                 float scale = a.getFloat(R.styleable.StyledEditor_scale_y, 1);
                 setScaleY(scale);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
 
             try {
                 String text = a.getString(R.styleable.StyledEditor_android_text);
@@ -65,35 +66,20 @@ public class StyledEditor extends AStyledEditor<StyledEditor> {
             }
 
             try {
+                int width = a.getDimensionPixelOffset(R.styleable.StyledEditor_view_width, -1);
+                if (width > -1) setViewWidth(width);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int height = a.getDimensionPixelOffset(R.styleable.StyledEditor_view_height, -1);
+                if (height > -1) setViewHeight(height);
+            } catch (Exception ignored) {
+            }
+
+            try {
                 int alignment = a.getInt(R.styleable.StyledEditor_alignment, -1);
-                switch (alignment) {
-                    case 0:
-                        setAlignment(Alignment.Center);
-                        break;
-                    case 1:
-                        setAlignment(Alignment.TopRight);
-                        break;
-                    case 2:
-                        setAlignment(Alignment.TopLeft);
-                        break;
-                    case 3:
-                        setAlignment(Alignment.BottomRight);
-                        break;
-                    case 4:
-                        setAlignment(Alignment.BottomLeft);
-                        break;
-                    case 5:
-                        setAlignment(Alignment.CenterLeft);
-                        break;
-                    case 6:
-                        setAlignment(Alignment.CenterRight);
-                        break;
-                    case 7:
-                        setAlignment(Alignment.TopCenter);
-                        break;
-                    case 8:
-                        setAlignment(Alignment.BottomCenter);
-                }
+                setAlignment(alignment);
             } catch (Exception ignored) {
             }
 
@@ -104,68 +90,102 @@ public class StyledEditor extends AStyledEditor<StyledEditor> {
             }
 
             try {
+                int color = a.getInt(R.styleable.StyledEditor_textColor, -1);
+                setForegroundColor(color);
+            } catch (Exception ignored) {
+            }
+
+            try {
                 int color = a.getColor(R.styleable.StyledEditor_android_textColorHint, getTextColor());
                 setHintColor(color);
             } catch (Exception ignored) {
             }
 
             try {
-                int style = a.getInt(R.styleable.StyledEditor_view_font_style, -1);
-                switch (style) {
-                    case 0:
-                        setFontStyle(Font.Style.Bold);
-                        break;
-                    case 1:
-                        setFontStyle(Font.Style.Italic);
-                        break;
-                    case 2:
-                        setFontStyle(Font.Style.Regular);
-                        break;
-                    case 3:
-                        setFontStyle(Font.Style.BoldItalic);
-                }
+                int font = a.getInt(R.styleable.StyledEditor_font_family, 0);
+                setFontFamily(font);
             } catch (Exception ignored) {
             }
 
             try {
+                int font = a.getInt(R.styleable.StyledEditor_view_font, -1);
+                setFont(font);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int style = a.getInt(R.styleable.StyledEditor_view_font_style, -1);
+                setStyle(style);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                String text = a.getString(R.styleable.StyledEditor_link);
+                OnLinkClickListener<StyledEditor> listener = (view, txt, link) -> {
+                };
+                if (text != null)
+                    addLinks(listener, text);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                String url = a.getString(R.styleable.StyledEditor_url);
+                String text = a.getString(R.styleable.StyledEditor_urlText);
+                if (url != null && text != null)
+                    addUrlLinks(url, text);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int padding = a.getDimensionPixelOffset(R.styleable.StyledEditor_view_padding, 0);
+                setPadding(padding);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int padding = a.getDimensionPixelOffset(R.styleable.StyledEditor_view_padding_horizontal, 0);
+                setPaddingHorizontal(padding);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int padding = a.getDimensionPixelOffset(R.styleable.StyledEditor_view_padding_vertical, 0);
+                setPaddingVertical(padding);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int padding = a.getDimensionPixelOffset(R.styleable.StyledEditor_view_padding_start, 0);
+                setPaddingLeft(padding);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int padding = a.getDimensionPixelOffset(R.styleable.StyledEditor_view_padding_end, 0);
+                setPaddingRight(padding);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int padding = a.getDimensionPixelOffset(R.styleable.StyledEditor_view_padding_top, 0);
+                setPaddingTop(padding);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int padding = a.getDimensionPixelOffset(R.styleable.StyledEditor_view_padding_bottom, 0);
+                setPaddingBottom(padding);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int format = a.getInt(R.styleable.StyledEditor_autoComplete_format, -1);
+                setAutoComplete(format);
+            } catch (Exception ignored) {}
+
+            try {
                 int background = a.getInt(R.styleable.StyledEditor_view_background, 11);
-                switch (background) {
-                    case 0:
-                        setBackground(Background.Black);
-                        break;
-                    case 1:
-                        setBackground(Background.Grey);
-                        break;
-                    case 2:
-                        setBackground(Background.White);
-                        break;
-                    case 3:
-                        setBackground(Background.Red);
-                        break;
-                    case 4:
-                        setBackground(Background.Blue);
-                        break;
-                    case 5:
-                        setBackground(Background.Green);
-                        break;
-                    case 6:
-                        setBackground(Background.Yellow);
-                        break;
-                    case 7:
-                        setBackground(Background.Orange);
-                        break;
-                    case 8:
-                        setBackground(Background.Purple);
-                        break;
-                    case 9:
-                        setBackground(Background.Pink);
-                        break;
-                    case 10:
-                        setBackground(Background.Brown);
-                        break;
-                    case 11:
-                        setBackground(Background.Transparent);
-                }
+                setBackground(background);
             } catch (Exception ignored) {
             }
 

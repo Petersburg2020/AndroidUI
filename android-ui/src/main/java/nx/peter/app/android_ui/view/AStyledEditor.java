@@ -11,13 +11,14 @@ import android.view.ViewGroup;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import nx.peter.app.android_ui.R;
+import nx.peter.app.android_ui.view.text.Font;
 
 import java.util.*;
 
 /**
- * IMultiActionEditor is an abstract view that prototyped every text editor with
+ * AStyledEditor is an abstract view that prototyped every text editor with
  * multiple actions and styles.
- * @param <I> the type of IMultiActionEditor view
+ * @param <I> the type of AStyledEditor view
  */
 abstract class AStyledEditor<I extends AStyledEditor> extends AStyledView<I, MultiAutoCompleteTextView> implements IStyledEditor<I> {
 
@@ -38,9 +39,25 @@ abstract class AStyledEditor<I extends AStyledEditor> extends AStyledView<I, Mul
         super.reset();
         adapter = new Adapter(new ArrayList<>());
         view.setAdapter(adapter);
-        background = Background.Transparent;
         setText("Try google this color, icon icn, underline, large-text, with emphasis and click here!");
+        addLinks((view, text, link) -> {}, "here");
+        addUrlLinks("https://google.com", "google");
+        addSubSizes((int) (getTextSize() * 1.2f), "large-text");
+        addSubImages(R.drawable.no_image, "icn");
+        addSubFonts(Font.Style.Bold, "emphasis");
+        addUnderlines("underline");
+        addSubColors(Color.GREEN, "color");
+    }
 
+    protected void setAutoComplete(int format) {
+        switch (format) {
+            case 0: setTokenizer(new CustomTokenizer(Tokenizer.CODING)); break;
+            case 1: setTokenizer(new CustomTokenizer(":")); break;
+            case 2: setTokens(Tokens.Comma); break;
+            case 3: setTokens(Tokens.Dot); break;
+            case 4: setTokenizer(new CustomTokenizer(";")); break;
+            case 6: setTokens(Tokens.Space);
+        }
     }
 
     @Override
@@ -107,10 +124,10 @@ abstract class AStyledEditor<I extends AStyledEditor> extends AStyledView<I, Mul
      * @param suggestions an array of suggestions
      */
     public void addSuggestions(@NonNull CharSequence... suggestions) {
-        String[] vals = new String[suggestions.length];
+        String[] values = new String[suggestions.length];
         for (int i = 0; i < suggestions.length; i++)
-            vals[i] = suggestions[i].toString();
-        addSuggestions(Arrays.asList(vals));
+            values[i] = suggestions[i].toString();
+        addSuggestions(Arrays.asList(values));
     }
 
     /**

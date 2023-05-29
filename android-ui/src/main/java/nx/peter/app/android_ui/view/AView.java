@@ -1,9 +1,11 @@
 package nx.peter.app.android_ui.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -19,19 +21,65 @@ import java.util.Arrays;
 
 abstract class AView<V extends View> extends LinearLayout implements IView<V> {
     protected Background background;
+    protected Resources res;
 
-    public AView(Context context) {
+    public AView(@NonNull Context context) {
         this(context, null);
     }
 
-    public AView(Context context, AttributeSet attrs) {
+    public AView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        res = Resources.getSystem();
         init(attrs);
     }
 
     protected abstract void init(AttributeSet attrs);
 
     protected abstract void reset();
+
+    protected void setBackground(int background) {
+        switch (background) {
+            case 0:
+                setBackground(Background.Black);
+                break;
+            case 1:
+                setBackground(Background.Grey);
+                break;
+            case 2:
+                setBackground(Background.White);
+                break;
+            case 3:
+                setBackground(Background.Red);
+                break;
+            case 4:
+                setBackground(Background.Blue);
+                break;
+            case 5:
+                setBackground(Background.Green);
+                break;
+            case 6:
+                setBackground(Background.Yellow);
+                break;
+            case 7:
+                setBackground(Background.Orange);
+                break;
+            case 8:
+                setBackground(Background.Purple);
+                break;
+            case 9:
+                setBackground(Background.Pink);
+                break;
+            case 10:
+                setBackground(Background.Brown);
+                break;
+            case 11:
+                setBackground(Background.Transparent);
+        }
+    }
+
+    protected DisplayMetrics getDisplayMetrics() {
+        return res.getDisplayMetrics();
+    }
 
     protected TypedArray obtainStyledAttributes(@Nullable AttributeSet attrs, @NonNull @StyleableRes int[] styledAttrs) {
         return getContext().obtainStyledAttributes(attrs, styledAttrs);

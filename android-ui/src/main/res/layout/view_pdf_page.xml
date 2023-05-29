@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pdf_page_container"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!-- Used by BasePDFPagerAdapter. Kept for backwards compatibility -->
+    <ImageView
+            android:id="@+id/imageView"
+            android:contentDescription="@string/pdf_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    <!-- Used by inheriting classes that implement zooming effect -->
+    <nx.peter.app.android_ui.view.SubsamplingScaleImageView
+            android:id="@+id/subsamplingImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</FrameLayout>

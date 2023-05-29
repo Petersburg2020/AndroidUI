@@ -6,40 +6,42 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.annotation.*;
+import androidx.core.content.ContextCompat;
 import nx.peter.app.android_ui.R;
 import nx.peter.app.android_ui.view.text.*;
-import nx.peter.app.android_ui.view.text.FontFamily.*;
+import nx.peter.app.android_ui.view.text.FontFamily.Family;
+import nx.peter.app.android_ui.view.text.FontFamily.Style;
+import nx.peter.app.android_ui.view.util.Colors;
 import nx.peter.app.android_ui.view.util.Size;
 
 import java.util.List;
 
-public class ImageTextButton extends AView<ImageTextButton> implements StyledView<ImageTextButton> {
+public class StyledImageText extends AView<StyledImageText> implements StyledView<StyledImageText> {
     private ImageView imageView;
     private StyledText view;
     private LinearLayout layout;
     private Background background;
-    private OnTextChangedListener<ImageTextButton> textChanged;
-    private OnPropertyChangedListener<ImageTextButton> propertyChanged;
+    private OnTextChangedListener<StyledImageText> textChanged;
+    private OnPropertyChangedListener<StyledImageText> propertyChanged;
 
-    public ImageTextButton(Context context) {
+    public StyledImageText(Context context) {
         super(context);
     }
 
-    public ImageTextButton(Context context, @Nullable AttributeSet attrs) {
+    public StyledImageText(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void init(AttributeSet attrs) {
-        inflate(getContext(), R.layout.view_image_text_button, this);
+        inflate(getContext(), R.layout.view_image_text, this);
         imageView = findViewById(R.id.image);
         view = findViewById(R.id.multi_text);
         layout = findViewById(R.id.layout);
@@ -48,10 +50,10 @@ public class ImageTextButton extends AView<ImageTextButton> implements StyledVie
         float sp = res.getDisplayMetrics().scaledDensity;
 
         if (attrs != null) {
-            TypedArray a = obtainStyledAttributes(attrs, R.styleable.ImageTextButton);
+            TypedArray a = obtainStyledAttributes(attrs, R.styleable.StyledImageText);
 
             try {
-                String text = a.getString(R.styleable.ImageTextButton_android_text);
+                String text = a.getString(R.styleable.StyledImageText_android_text);
                 if (text == null)
                     text = "Button Text";
                 setText(text);
@@ -59,52 +61,53 @@ public class ImageTextButton extends AView<ImageTextButton> implements StyledVie
             }
 
             try {
-                int color = a.getColor(R.styleable.ImageTextButton_android_textColor, Color.DKGRAY);
+                int color = a.getColor(R.styleable.StyledImageText_android_textColor, Colors.DARK_GREY);
                 setTextColor(color);
             } catch (Exception ignored) {
             }
 
             try {
-                float size = a.getDimension(R.styleable.ImageTextButton_android_textSize, getContext().getResources().getDimension(R.dimen.text_size));
+                float size = a.getDimension(R.styleable.StyledImageText_android_textSize, getContext().getResources().getDimension(R.dimen.text_size));
                 setTextSize(size / sp);
             } catch (Exception ignored) {
             }
 
             try {
-                Drawable image = a.getDrawable(R.styleable.ImageTextButton_android_src);
+                Drawable image = a.getDrawable(R.styleable.StyledImageText_android_src);
                 if (image == null)
-                    image = res.getDrawable(R.drawable.ic_launcher_background);
+                    image = ContextCompat.getDrawable(getContext(), R.drawable.ic_launcher_background);
+                assert image != null;
                 setImage(image);
             } catch (Exception ignored) {
             }
 
             try {
-                boolean wrapped = a.getBoolean(R.styleable.ImageTextButton_isWrapped, false);
+                boolean wrapped = a.getBoolean(R.styleable.StyledImageText_isWrapped, false);
                 setWrapped(wrapped);
             } catch (Exception ignored) {
             }
 
             try {
-                int margin = (int) (a.getDimensionPixelSize(R.styleable.ImageTextButton_image_text_margin, getContext().getResources().getDimensionPixelSize(R.dimen.image_text_margin)) / sp);
+                int margin = (int) (a.getDimensionPixelSize(R.styleable.StyledImageText_image_text_margin, getContext().getResources().getDimensionPixelSize(R.dimen.image_text_margin)) / sp);
                 setImageTextMargin(margin);
             } catch (Exception ignored) {
             }
 
             try {
-                int size = (int) (a.getDimensionPixelSize(R.styleable.ImageTextButton_image_size, 0) / sp);
+                int size = (int) (a.getDimensionPixelSize(R.styleable.StyledImageText_image_size, 0) / sp);
                 setImageSize(size);
             } catch (Exception ignored) {
             }
 
             try {
-                int width = (int) (a.getDimensionPixelSize(R.styleable.ImageTextButton_image_width, getContext().getResources().getDimensionPixelSize(R.dimen.image_size)) / sp);
+                int width = (int) (a.getDimensionPixelSize(R.styleable.StyledImageText_image_width, getContext().getResources().getDimensionPixelSize(R.dimen.image_size)) / sp);
                 if (getImageWidth() <= 0)
                     setImageWidth(width);
             } catch (Exception ignored) {
             }
 
             try {
-                int height = (int) (a.getDimensionPixelSize(R.styleable.ImageTextButton_image_height, getContext().getResources().getDimensionPixelSize(R.dimen.image_size)) / sp);
+                int height = (int) (a.getDimensionPixelSize(R.styleable.StyledImageText_image_height, getContext().getResources().getDimensionPixelSize(R.dimen.image_size)) / sp);
                 if (getImageHeight() <= 0)
                     setImageHeight(height);
             } catch (Exception ignored) {
@@ -120,7 +123,6 @@ public class ImageTextButton extends AView<ImageTextButton> implements StyledVie
     protected void reset() {
         propertyChanged = null;
         textChanged = null;
-
 
         setBackground(Background.Transparent);
         setText("facebook comment");
@@ -243,43 +245,43 @@ public class ImageTextButton extends AView<ImageTextButton> implements StyledVie
     public void setForeground(@NonNull Foreground foreground) {
         switch (foreground) {
             case Blue:
-                setColor(Color.BLUE);
+                setColor(Colors.BLUE);
                 break;
             case Black:
-                setColor(Color.BLACK);
+                setColor(Colors.BLACK);
                 break;
             case Brown:
-                setColor(Color.parseColor("#FF603608"));
+                setColor(Colors.BROWN);
                 break;
             case Cyan:
-                setColor(Color.CYAN);
+                setColor(Colors.CYAN);
                 break;
             case Green:
-                setColor(Color.GREEN);
+                setColor(Colors.GREEN);
                 break;
             case Grey:
-                setColor(Color.GRAY);
+                setColor(Colors.GREY);
                 break;
             case Lime:
-                setColor(Color.parseColor("#FF84FF00"));
+                setColor(Colors.LIME);
                 break;
             case Pink:
-                setColor(Color.parseColor("#FFFF00D8"));
+                setColor(Colors.PINK);
                 break;
             case Orange:
-                setColor(Color.parseColor("#FFFF7500"));
+                setColor(Colors.ORANGE);
                 break;
             case Purple:
-                setColor(Color.parseColor("#FF7500FF"));
+                setColor(Colors.TRANSPARENT);
                 break;
             case Red:
-                setColor(Color.RED);
+                setColor(Colors.RED);
                 break;
             case White:
-                setColor(Color.WHITE);
+                setColor(Colors.WHITE);
                 break;
             case Yellow:
-                setColor(Color.YELLOW);
+                setColor(Colors.YELLOW);
                 break;
         }
     }
@@ -516,22 +518,22 @@ public class ImageTextButton extends AView<ImageTextButton> implements StyledVie
 
 
     @Override
-    public void setOnTextChangedListener(OnTextChangedListener<ImageTextButton> listener) {
+    public void setOnTextChangedListener(OnTextChangedListener<StyledImageText> listener) {
         textChanged = listener;
     }
 
     @Override
-    public void setOnPropertyChangedListener(OnPropertyChangedListener<ImageTextButton> listener) {
+    public void setOnPropertyChangedListener(OnPropertyChangedListener<StyledImageText> listener) {
         propertyChanged = listener;
     }
 
     @Override
-    public OnTextChangedListener<ImageTextButton> getOnTextChangedListener() {
+    public OnTextChangedListener<StyledImageText> getOnTextChangedListener() {
         return textChanged;
     }
 
     @Override
-    public OnPropertyChangedListener<ImageTextButton> getOnPropertyChangedListener() {
+    public OnPropertyChangedListener<StyledImageText> getOnPropertyChangedListener() {
         return propertyChanged;
     }
 
@@ -584,9 +586,9 @@ public class ImageTextButton extends AView<ImageTextButton> implements StyledVie
         return view.getTextSize();
     }
 
-    public void addLinks(final OnLinkClickListener<ImageTextButton> link, CharSequence... subs) {
+    public void addLinks(final OnLinkClickListener<StyledImageText> link, CharSequence... subs) {
         view.addLinks((view, text, l) -> {
-            if (link != null) link.onClickLink(ImageTextButton.this, text, l);
+            if (link != null) link.onClickLink(StyledImageText.this, text, l);
         }, subs);
     }
 

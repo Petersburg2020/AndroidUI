@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/white"
+        tools:context=".MainActivity">
+
+    <nx.peter.app.android_ui.view.StyledText
+            android:id="@+id/styled"
+            app:urlText="Android UI"
+            app:view_padding="20dp"
+            app:view_background="black"
+            android:textColor="@color/white"
+            app:url="github.com/Petersburg2020/AndroidUI"
+            android:text="Android UI is cool and I love it."
+            android:textColorLink="@color/wine"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</RelativeLayout>

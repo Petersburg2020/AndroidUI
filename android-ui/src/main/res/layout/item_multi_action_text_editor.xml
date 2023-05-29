@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<nx.peter.app.ui.view.MultiActionText
+<nx.peter.app.android_ui.view.StyledEditor
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/item"
         android:layout_width="match_parent"

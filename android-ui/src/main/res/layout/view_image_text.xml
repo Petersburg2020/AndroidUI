@@ -20,10 +20,10 @@
             android:src="@drawable/ic_launcher_background"
             android:id="@+id/image"
             android:scaleType="fitXY"
-            android:contentDescription="Button Image"/>
+            android:contentDescription="Image"/>
 
-        <nx.peter.app.ui.view.MultiActionText
-                android:text="Button Text"
+        <nx.peter.app.android_ui.view.StyledText
+                android:text="Text"
                 android:layout_width="wrap_content"
                 android:layout_height="39dp"
                 android:textSize="10sp"

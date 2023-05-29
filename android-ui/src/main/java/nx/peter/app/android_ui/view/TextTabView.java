@@ -44,6 +44,8 @@ public class TextTabView extends AView<TextTabView> {
 		inflate(getContext(), R.layout.view_tab_text, this);
 		layout = findViewById(R.id.layout);
 		reset();
+
+
 	}
 
 	protected void reset() {

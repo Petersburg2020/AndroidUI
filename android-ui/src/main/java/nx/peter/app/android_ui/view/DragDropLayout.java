@@ -12,11 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import nx.peter.app.android_ui.R;
 
-public class DragDropLayout extends ALayout<DragDropLayout, View> {
-    protected AbsoluteLayout layer;
-
+public class DragDropLayout extends AbsoluteLayout {
 
     public DragDropLayout(@NonNull Context c) {
         super(c);
@@ -26,18 +23,7 @@ public class DragDropLayout extends ALayout<DragDropLayout, View> {
         super(c, attrs);
     }
 
-    @Override
-    protected void init(@Nullable AttributeSet attrs) {
-        inflate(getContext(), R.layout.layout_drag_drop, this);
-        reset();
-    }
-
-    @Override
-    protected void reset() {
-
-    }
-
-    public <V extends View> V findChildById(@IdRes int id) {
+    public View findChildById(@IdRes int id) {
         DragView view = findViewById(id);
         return view != null ? view.getContentView() : null;
     }
@@ -48,7 +34,7 @@ public class DragDropLayout extends ALayout<DragDropLayout, View> {
         return view != null ? ((DragView) view).getContentView() : null;
     }
 
-    @Override
+    /*@Override
     public void addChild(View view) {
         addView(view);
     }
@@ -60,32 +46,32 @@ public class DragDropLayout extends ALayout<DragDropLayout, View> {
 
     @Override
     public void addChild(View child, LayoutDetails details) {
-        addView(child, details);
-    }
+        addView(child, new LayoutDetails(details));
+    }*/
 
     @Override
     public void addView(View child) {
-        layer.addView(new DragView(child));
+        super.addView(new DragView(child));
     }
 
     @Override
     public void addView(View child, int index) {
-        layer.addView(new DragView(child), index);
+        super.addView(new DragView(child), index);
     }
 
     @Override
     public void addView(View child, int width, int height) {
-        layer.addView(new DragView(child), width, height);
+        super.addView(new DragView(child), width, height);
     }
 
     @Override
     public void addView(View child, ViewGroup.LayoutParams params) {
-        layer.addView(new DragView(child), params);
+        super.addView(new DragView(child), params);
     }
 
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
-        layer.addView(new DragView(child), index, params);
+        super.addView(new DragView(child), index, params);
     }
 
 

@@ -4,7 +4,7 @@
               android:padding="0dp"
               android:orientation="vertical">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"/>

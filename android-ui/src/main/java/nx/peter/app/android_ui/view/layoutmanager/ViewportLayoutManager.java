@@ -1,4 +1,4 @@
-package nx.peter.app.android_ui.view.util;
+package nx.peter.app.android_ui.view.layoutmanager;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<nx.peter.app.ui.view.ImageTextButton
+<nx.peter.app.android_ui.view.StyledImageText
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/view"
         android:layout_height="match_parent"

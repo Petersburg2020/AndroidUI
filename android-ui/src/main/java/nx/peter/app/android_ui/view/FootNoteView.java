@@ -269,7 +269,7 @@ public class FootNoteView extends AView<FootNoteView> {
         }
 
         public static class SocialHolder extends RecyclerView.ViewHolder {
-            final ImageTextButton view;
+            final StyledImageText view;
 
             public SocialHolder(@NonNull View itemView) {
                 super(itemView);

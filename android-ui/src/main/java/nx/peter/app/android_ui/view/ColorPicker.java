@@ -10,7 +10,8 @@ public class ColorPicker extends AView<ColorPicker> {
 
   @Override
   protected void init(AttributeSet attrs) {
-      
+
+
   }
 
   @Override

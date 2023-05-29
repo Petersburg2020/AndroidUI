@@ -2,6 +2,7 @@ package nx.peter.app.android_ui.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -11,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import nx.peter.app.android_ui.R;
 import nx.peter.app.android_ui.view.text.Font;
-import nx.peter.app.android_ui.view.util.Constant;
+import nx.peter.app.android_ui.view.util.Colors;
+import nx.peter.app.android_ui.view.util.Dimens;
+import nx.peter.app.android_ui.view.util.Regex;
 import nx.peter.java.util.data.Number;
 import nx.peter.java.util.data.*;
 
@@ -20,6 +23,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CodeEditor extends AView<CodeEditor> {
+    public static final int DEFAULT_TAB_SIZE = 4;
+
+
     protected StyledEditor editor;
     protected StyledText lineNumber;
     protected LinearLayout divider;
@@ -28,7 +34,7 @@ public class CodeEditor extends AView<CodeEditor> {
     protected IKeywords keywords;
     protected CharSequence text;
     protected Formatter formatter;
-    protected int lastLineCount;
+    protected int lastLineCount, tabSize;
 
 
     public CodeEditor(Context context) {
@@ -48,11 +54,39 @@ public class CodeEditor extends AView<CodeEditor> {
         // init(getContext());
         reset();
 
+        if (attrs != null) {
+            TypedArray a = obtainStyledAttributes(attrs, R.styleable.CodeEditor);
+
+
+            try {
+                float size = a.getDimensionPixelSize(R.styleable.CodeEditor_android_textSize, (int) Dimens.toSp(16));
+                setTextSize(size / getDisplayMetrics().scaledDensity);
+            } catch (Exception ignored) {
+            }
+
+            try {
+                int theme = a.getInt(R.styleable.CodeEditor_code_theme, 1);
+                switch (theme) {
+                    case 0:
+                        setTheme(Theme.Default);
+                        break;
+                    case 2:
+                        setTheme(Theme.AriakeDark);
+                        break;
+                    case 1:
+                        setTheme(Theme.Dracula);
+                }
+            } catch (Exception ignored) {
+            }
+
+        }
     }
 
     protected void reset() {
+        lineNumber.setPaddingHorizontal(10);
         theme = Theme.Default;
         lastLineCount = 0;
+        tabSize = DEFAULT_TAB_SIZE;
         formatter = code -> {
             Log.i("CodeEditor", code.toString());
             return code;
@@ -73,13 +107,32 @@ public class CodeEditor extends AView<CodeEditor> {
         // setText(getSourceCode().getContent().get() + "\n" + getLineCount());
 
         editor.setOnTextChangedListener((view, oldText, newText) ->
-                editor.post(() -> {
+                        // setup()
+                        updateLine()
+                /*editor.post(() -> {
                     if (editor.getLineCount() > lastLineCount)
                         updateLine();
-                }));
+                })*/);
 
-        addKeywords(Function.Others, "for");
+        addKeywords(Function.Others, "for", "new");
         addKeywords(Function.NativeDataType, "int", "double", "long", "float", "short", "byte");
+    }
+
+    public void setTextFormatter(@Nullable Formatter formatter) {
+        this.formatter = formatter;
+    }
+
+    public Formatter getFormatter() {
+        return formatter;
+    }
+
+    public void setTabSize(int tabSize) {
+        this.tabSize = tabSize;
+        setup();
+    }
+
+    public int getTabSize() {
+        return tabSize;
     }
 
     public Source getSourceCode() {
@@ -105,6 +158,10 @@ public class CodeEditor extends AView<CodeEditor> {
     public void setText(@NonNull CharSequence text) {
         this.text = text;
         setup();
+    }
+
+    protected Regex toRegex() {
+        return Regex.getInstance(getText());
     }
 
     public void appendText(@NonNull CharSequence text) {
@@ -205,7 +262,8 @@ public class CodeEditor extends AView<CodeEditor> {
 
     protected void setup() {
         editor.setText(formatter != null ? formatter.format(text) : text);
-        // editor.setTextColor(data.getValueColor(Function.Others));
+        // editor.setTextColor(data.Normal);
+        updateTab();
         updateLine();
         // editor.clearSuggestions();
         // editor.addSuggestions(keywords.getKeywords());
@@ -217,7 +275,8 @@ public class CodeEditor extends AView<CodeEditor> {
 
         keywords();
         numbers();
-        // comments();
+        // strings();
+        comments();
     }
 
     protected void updateLine() {
@@ -225,22 +284,21 @@ public class CodeEditor extends AView<CodeEditor> {
         for (int n = 1; n <= getLineCount(); n++)
             lineNumber.appendText(n + "\n");
         lastLineCount = getLineCount();
+    }
 
-        /*editor.post(() -> {
-            lineNumber.clearText();
-            for (int n = 1; n <= getLineCount(); n++)
-                lineNumber.appendText(n + "\n");
-            lastLineCount = getLineCount();
-        });*/
+    protected void updateTab() {
+        editor.setText(toRegex().replaceAll("\t", " ".repeat(tabSize)));
     }
 
     protected void keywords() {
         if (keywords.isNotEmpty())
             for (Function function : keywords.getFunctions()) {
-                IKeywords k = ((IKeywords) keywords.getByFunction(function));
-                int color = data.getTypeColor(function);
-                k.setColor(color);
-                editor.addSubColors(color, k.getKeywords());
+                if (!function.equals(Function.Comment)) {
+                    IKeywords k = ((IKeywords) keywords.getByFunction(function));
+                    int color = data.getTypeColor(function);
+                    k.setColor(color);
+                    editor.addSubColors(color, k.getKeywords());
+                }
             }
     }
 
@@ -252,16 +310,49 @@ public class CodeEditor extends AView<CodeEditor> {
             editor.addSubColors(data.getValueColor(Function.NativeDataType), number.get());
     }
 
+    protected void strings() {
+        Regex.Properties props = toRegex().split('\"');
+        for (int n = 1; n < props.size(); n += 2)
+            editor.addSubColors(data.StringValue, "\"" + props.getPropertyAt(n).getData() + '\"');
+    }
+
     protected int newLineCount() {
-        return DataCreator.createSentence(null, getText()).count('\n');
+        return getLines().size();
+    }
+
+    public ISentence.Lines getLines() {
+        List<nx.peter.java.util.data.Line> lines = new ArrayList<>();
+        Regex.Properties props = toRegex().split('\n');
+        int line = 1;
+
+        for (Regex.Property prop : props) {
+            lines.add(new nx.peter.java.util.data.Line(line, String.valueOf(prop.getData())));
+            line++;
+        }
+
+        return new ISentence.Lines(new Sentence(getText()), lines);
+    }
+
+    public nx.peter.java.util.data.Line getLine(int line) {
+        return getLines().getLine(line);
     }
 
     protected void comments() {
         // Single line comment format
-        for (int line = 1; line < getSourceCode().getLineCount(); line++) {
-            Line l = getSourceCode().getLine(line);
-            editor.addSubColors(data.getTypeColor(Function.Comment), l.getContent().subLetters(l.getContent().indexOf("//")));
+        for (int line = 1; line <= getLineCount(); line++) {
+            // nx.peter.java.util.data.Line l = getLine(line);
+            editor.appendText("\nnew " + line);
+            /*if (l != null && l.contains("//"))
+                editor.addSubColors(data.getTypeColor(Function.Comment), l.subLetters(l.indexOf("//")));*/
         }
+
+        /*Sentence sentence = DataCreator.createSentence(null, getText());
+        ISentence.Lines lines = sentence.extractLines();
+        for (int line = 1; line < getLineCount(); line++) {
+            // Line l = getSourceCode().getLine(line);
+            nx.peter.java.util.data.Line l = lines.getLine(line);
+            editor.addSubColors(data.getTypeColor(Function.Comment), l.subLetters(l.indexOf("//")));
+        }*/
     }
 
 
@@ -1011,13 +1102,11 @@ public class CodeEditor extends AView<CodeEditor> {
             int index = 0;
             while (index > -1) {
                 index = source.getContent().indexOf(start, index);
-                int sIndex = index; // Start Index
+
                 if (index <= -1) break; // terminate if start tag does not exist
 
-                // index = source.getContent().indexOf(end, index); // Get index of end tag
-                // int eIndex = index; // End index
-                // if (index <= -1) break; // Terminate if end tag does not exist
                 blocks.add(new IBlock(type, source, start, end, index));
+                index++;
             }
             return new IBlocks(source, blocks);
         }
@@ -1308,45 +1397,45 @@ public class CodeEditor extends AView<CodeEditor> {
     protected static Context context;
 
     public static final ThemeData NORMAL_THEME = new IThemeData(
-            Color.GREEN,
-            Constant.PINK,
-            Constant.BLUE_LIGHT,
-            Color.YELLOW,
-            Constant.LIME,
-            Constant.PURPLE_LIGHT
+            Colors.GREEN,
+            Colors.PINK,
+            Colors.BLUE_LIGHT,
+            Colors.YELLOW,
+            Colors.LIME,
+            Colors.PURPLE_LIGHT
     );
 
     public static final ThemeData ARIAKE_DARK = new IThemeData(
-            Constant.PURPLE_LIGHT,
-            Constant.BLUE_LIGHT,
-            Constant.PINK,
-            Color.GREEN,
-            Constant.PURPLE,
-            Constant.GOLD
+            Colors.PURPLE_LIGHT,
+            Colors.BLUE_LIGHT,
+            Colors.PINK,
+            Colors.GREEN,
+            Colors.PURPLE,
+            Colors.GOLD
     );
 
     public static final ThemeData NIGHT_OWL = new IThemeData(
-            Constant.VIOLET,
-            Constant.LIME,
-            Constant.ORANGE,
-            Constant.GOLD,
-            Constant.PINK,
-            Constant.PURPLE_LIGHT
+            Colors.VIOLET,
+            Colors.LIME,
+            Colors.ORANGE,
+            Colors.GOLD,
+            Colors.PINK,
+            Colors.PURPLE_LIGHT
     );
 
     public static final ThemeData DRACULA = new IThemeData(
             Background.Black,
-            Constant.PURPLE,
-            Constant.GREY_LIGHT,
-            Constant.GREY_LIGHT,
-            Constant.ORANGE,
-            Constant.ORANGE,
-            Color.WHITE,
-            Color.WHITE,
-            Constant.WHITE,
-            Color.GRAY,
-            Constant.BLUE_LIGHT,
-            Constant.ORANGE
+            Colors.PURPLE,
+            Colors.GREY_LIGHT,
+            Colors.GREY_LIGHT,
+            Colors.ORANGE,
+            Colors.ORANGE,
+            Colors.ORANGE,
+            Colors.WHITE,
+            Colors.WHITE,
+            Colors.GREY,
+            Colors.BLUE_LIGHT,
+            Colors.ORANGE
     );
 
 
@@ -1380,7 +1469,7 @@ public class CodeEditor extends AView<CodeEditor> {
                 @ColorInt int others,
                 @ColorInt int dataValue
         ) {
-            this(Background.Black, klass, method, function, accessibility, nativeDataType, stringType, others, Color.WHITE, Constant.GREY_LIGHT, dataValue);
+            this(Background.Black, klass, method, function, accessibility, nativeDataType, stringType, others, Color.WHITE, Colors.GREY_LIGHT, dataValue);
         }
 
         public IThemeData(
@@ -1406,7 +1495,7 @@ public class CodeEditor extends AView<CodeEditor> {
                 @ColorInt int others,
                 @ColorInt int dataValue
         ) {
-            this(background, klass, method, function, accessibility, nativeDataType, stringType, others, Color.WHITE, Constant.GREY_LIGHT, dataValue);
+            this(background, klass, method, function, accessibility, nativeDataType, stringType, others, Color.WHITE, Colors.GREY_LIGHT, dataValue);
         }
 
         public IThemeData(

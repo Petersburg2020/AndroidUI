@@ -160,7 +160,7 @@ public class TreeView extends AView<TreeView> {
             CheckBox arrow = view.findViewById(R.id.arrow);
             ImageView icon = view.findViewById(R.id.icon);
             StyledText text = view.findViewById(R.id.text);
-            ScrollingTextView detail = view.findViewById(R.id.detail);
+            ScrollingText detail = view.findViewById(R.id.detail);
 
             icon.setImageDrawable(value.icon);
             text.setText(value.text);

@@ -12,4 +12,6 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="icon_for_tree_item">Icon for Tree View Item</string>
     <string name="tree_view_item">Tree View Item</string>
+    <string name="pdf_page">Pdf Page</string>
+    <string name="what_we_need_is_here">What we need is here</string>
 </resources>

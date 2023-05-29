@@ -3,8 +3,8 @@ package nx.peter.app.android_ui.view.util;
 import android.graphics.Color;
 import androidx.annotation.ColorInt;
 
-public class Constant {
-    private Constant() {}
+public class Colors {
+    private Colors() {}
 
 
     @ColorInt
@@ -31,5 +31,23 @@ public class Constant {
     public static final int WINE = Color.parseColor("#FF990012");
     @ColorInt
     public static final int GREY_LIGHT = Color.parseColor("#FF888888");
+    @ColorInt
+    public static final int GREY = Color.GRAY;
+    @ColorInt
+    public static final int DARK_GREY = Color.DKGRAY;
+    @ColorInt
+    public static final int GREEN = Color.GREEN;
+    @ColorInt
+    public static final int BLACK = Color.BLACK;
+    @ColorInt
+    public static final int BLUE = Color.GRAY;
+    @ColorInt
+    public static final int RED = Color.RED;
+    @ColorInt
+    public static final int CYAN = Color.CYAN;
+    @ColorInt
+    public static final int YELLOW = Color.YELLOW;
+    @ColorInt
+    public static final int TRANSPARENT = Color.TRANSPARENT;
 
 }
