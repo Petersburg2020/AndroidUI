@@ -57,7 +57,7 @@ afterEvaluate {
         publishing.publications.create(variant.name, MavenPublication) {
             from components.findByName(variant.name) // as SoftwareComponent
 
-            groupId = 'com.github.Petersburg2020'
+            groupId = 'nx.peter.lib'
             artifactId = 'AndroidUI'
             version = '1.0.3'
         }

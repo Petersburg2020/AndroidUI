@@ -65,18 +65,14 @@ public class PdfView extends AView<PdfView> {
     }
 
     public void setPdfFile(@NonNull CharSequence path) {
-        try {
-            ParcelFileDescriptor pfd = ParcelFileDescriptor.open(new File(path), ParcelFileDescriptor.MODE_READ_ONLY);
-            PdfRenderer renderer = new PdfRenderer(pfd);
-
-            // renderer.openPage(1).
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         PDFViewPagerZoom pager = new PDFViewPagerZoom(getContext(), path.toString());
         setView(pager);
         // List<PdfDocument.PageInfo> pages = doc.getPages();
+    }
+
+    public void setPdfAssetFile(@NonNull CharSequence assetFile) {
+        PDFViewPagerZoom pager = new PDFViewPagerZoom(getContext(), assetFile.toString());
+        setView(pager);
     }
 
     protected void setView(ViewPager pager) {
