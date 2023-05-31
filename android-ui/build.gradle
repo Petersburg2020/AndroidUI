@@ -59,7 +59,7 @@ afterEvaluate {
 
             groupId = 'nx.peter.lib'
             artifactId = 'AndroidUI'
-            version = '1.0.2'
+            version = '1.0.3'
         }
     }
 
